@@ -3,7 +3,7 @@ const RESTRICTED = ['chrome:', 'chrome-extension:', 'edge:', 'about:', 'view-sou
 
 const updateBadge = async (tabId) => {
     const { scrollbarHidden = true, whitelist = [] } =
-        await chrome.storage.local.get(['scrollbarHidden', 'whitelist']);
+        await chrome.storage.sync.get(['scrollbarHidden', 'whitelist']);
 
     let isWhitelisted = false;
     let restricted = false;

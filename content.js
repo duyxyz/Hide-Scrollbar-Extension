@@ -25,7 +25,7 @@
   };
 
   const update = () => {
-    chrome.storage.local.get(
+    chrome.storage.sync.get(
       { scrollbarHidden: true, whitelist: [] },
       (res) => {
         if (chrome.runtime.lastError) return;

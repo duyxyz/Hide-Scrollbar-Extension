@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const loadState = () => {
-    chrome.storage.local.get(
+    chrome.storage.sync.get(
       { scrollbarHidden: true, whitelist: [] },
       (data) => {
         if (chrome.runtime.lastError) return;
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const uniqueDomains = [...new Set(domains)].sort();
 
-    chrome.storage.local.set({ whitelist: uniqueDomains }, () => {
+    chrome.storage.sync.set({ whitelist: uniqueDomains }, () => {
       if (chrome.runtime.lastError) return;
       updateNotice(uniqueDomains);
       exceptionCount.textContent = uniqueDomains.length === 0 ? 'none' : uniqueDomains.length;
@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const addDomain = (raw) => {
     const domain = sanitizeDomain(raw);
     if (!domain) return;
-    chrome.storage.local.get({ whitelist: [] }, (data) => {
+    chrome.storage.sync.get({ whitelist: [] }, (data) => {
       if (chrome.runtime.lastError) return;
       if (data.whitelist.includes(domain)) return;
       const newList = [...data.whitelist, domain].sort();
-      chrome.storage.local.set({ whitelist: newList }, () => {
+      chrome.storage.sync.set({ whitelist: newList }, () => {
         renderWhitelist(newList);
         updateNotice(newList);
       });
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   toggle.addEventListener('change', () => {
     const hidden = toggle.checked;
-    chrome.storage.local.set({ scrollbarHidden: hidden }, () => {
+    chrome.storage.sync.set({ scrollbarHidden: hidden }, () => {
       if (chrome.runtime.lastError) return;
     });
   });
@@ -132,8 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentHostname) addDomain(currentHostname);
   });
 
+  let debounceTimeout;
   whitelistTextarea.addEventListener('input', () => {
-    saveWhitelistFromTextarea();
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+      saveWhitelistFromTextarea();
+    }, 500); // Debounce 500ms
   });
 
   // --- Init --------------------------------------------------------------

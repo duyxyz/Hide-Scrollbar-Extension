@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ScrollHide</title>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_circle,warning" />
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/switch.css">
@@ -16,7 +14,6 @@
 
 <body>
   <div class="header">
-    <img src="icons/icon48.png" alt="Logo">
     <h1>I don't like scrollbar</h1>
     <label class="switch">
       <input type="checkbox" id="toggleScroll" aria-label="Toggle hiding scrollbar">
@@ -29,12 +26,11 @@
   </div>
 
   <div id="whitelistedNotice" class="whitelisted-notice">
-    <span class="material-symbols-rounded sm">warning</span> This site is in the exception list
+    This site is in the exception list
   </div>
 
   <div class="section-title">Exceptions <span id="exceptionCount" class="exception-count"></span></div>
-  <button id="addCurrentBtn" class="add-current-btn"><span class="material-symbols-rounded">add_circle</span> Add
-    current site</button>
+  <button id="addCurrentBtn" class="add-current-btn">Add current site</button>
 
   <textarea id="whitelistTextarea" class="whitelist-textarea" placeholder="www.example.com"
     spellcheck="false"></textarea>
