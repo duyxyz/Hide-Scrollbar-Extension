@@ -1,0 +1,74 @@
+/* Whitelist Section */
+.section-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin: 14px 0 10px;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.exception-count {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: auto;
+}
+
+.add-current-btn {
+    width: 100%;
+    padding: 9px;
+    font-size: 13px;
+    border: 1px dashed var(--border);
+    border-radius: 0;
+    background: var(--secondary-bg);
+    color: var(--muted);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all .2s;
+}
+
+.add-current-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.add-current-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Whitelist Textarea */
+.whitelist-textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    background: var(--input-bg);
+    color: var(--text);
+    resize: vertical;
+    min-height: 120px;
+    max-height: 300px;
+    outline: none;
+    display: block;
+}
+
+.whitelist-textarea:focus {
+    border-color: var(--accent);
+}
+
+.whitelist-textarea::-webkit-scrollbar {
+    width: 4px;
+}
+
+.whitelist-textarea::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 0;
+}

@@ -1,0 +1,22 @@
+/* Notices */
+.whitelisted-notice {
+    margin-top: 12px;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 0;
+    background: rgba(255, 149, 0, 0.12);
+    color: #ff9500;
+    text-align: center;
+    display: none;
+}
+
+.restricted-notice {
+    margin-top: 12px;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 0;
+    background: rgba(255, 59, 48, 0.1);
+    color: var(--danger);
+    text-align: center;
+    display: none;
+}

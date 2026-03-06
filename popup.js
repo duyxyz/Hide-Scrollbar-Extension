@@ -2,9 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('toggleScroll');
   const addCurrentBtn = document.getElementById('addCurrentBtn');
-  const domainInput = document.getElementById('domainInput');
-  const addDomainBtn = document.getElementById('addDomainBtn');
-  const whitelistContainer = document.getElementById('whitelistContainer');
+  const whitelistTextarea = document.getElementById('whitelistTextarea');
   const whitelistedNotice = document.getElementById('whitelistedNotice');
   const restrictedNotice = document.getElementById('restrictedNotice');
   const exceptionCount = document.getElementById('exceptionCount');
@@ -43,24 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const renderWhitelist = (whitelist) => {
     exceptionCount.textContent = whitelist.length === 0 ? 'none' : whitelist.length;
-
-    if (whitelist.length === 0) {
-      whitelistContainer.innerHTML = '';
-      return;
-    }
-    whitelistContainer.innerHTML = whitelist
-      .map(
-        (domain) =>
-          `<div class="whitelist-item">
-            <span class="domain" title="${domain}">${domain}</span>
-            <button class="remove-btn" data-domain="${domain}" title="Remove"><span class="material-symbols-rounded">close</span></button>
-          </div>`
-      )
-      .join('');
-
-    whitelistContainer.querySelectorAll('.remove-btn').forEach((btn) => {
-      btn.addEventListener('click', () => removeDomain(btn.dataset.domain));
-    });
+    whitelistTextarea.value = whitelist.join('\n');
   };
 
   const updateNotice = (whitelist) => {
@@ -109,6 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/^(https?:\/\/)?(www\.)?/, '')
       .replace(/\/.*$/, '');
 
+  const saveWhitelistFromTextarea = () => {
+    const rawText = whitelistTextarea.value;
+    const domains = rawText.split('\n')
+      .map(sanitizeDomain)
+      .filter(d => d);
+
+    const uniqueDomains = [...new Set(domains)].sort();
+
+    chrome.storage.local.set({ whitelist: uniqueDomains }, () => {
+      if (chrome.runtime.lastError) return;
+      updateNotice(uniqueDomains);
+      exceptionCount.textContent = uniqueDomains.length === 0 ? 'none' : uniqueDomains.length;
+    });
+  };
+
   const addDomain = (raw) => {
     const domain = sanitizeDomain(raw);
     if (!domain) return;
@@ -116,17 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (chrome.runtime.lastError) return;
       if (data.whitelist.includes(domain)) return;
       const newList = [...data.whitelist, domain].sort();
-      chrome.storage.local.set({ whitelist: newList }, () => {
-        renderWhitelist(newList);
-        updateNotice(newList);
-      });
-    });
-  };
-
-  const removeDomain = (domain) => {
-    chrome.storage.local.get({ whitelist: [] }, (data) => {
-      if (chrome.runtime.lastError) return;
-      const newList = data.whitelist.filter((d) => d !== domain);
       chrome.storage.local.set({ whitelist: newList }, () => {
         renderWhitelist(newList);
         updateNotice(newList);
@@ -147,16 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentHostname) addDomain(currentHostname);
   });
 
-  addDomainBtn.addEventListener('click', () => {
-    addDomain(domainInput.value);
-    domainInput.value = '';
-  });
-
-  domainInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      addDomain(domainInput.value);
-      domainInput.value = '';
-    }
+  whitelistTextarea.addEventListener('input', () => {
+    saveWhitelistFromTextarea();
   });
 
   // --- Init --------------------------------------------------------------

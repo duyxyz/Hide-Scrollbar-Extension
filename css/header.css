@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header img {
+    width: 24px;
+    height: 24px;
+    border-radius: 0;
+}
+
+.header h1 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.header .switch {
+    margin-left: auto;
+}
