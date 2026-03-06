@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Скрыть полосу прокрутки",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Автоматически скрывает полосу прокрутки на большинстве веб-сайтов для более чистого интерфейса.",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "Мне не нравится полоса прокрутки"
+    },
+    "restrictedNotice": {
+        "message": "Расширение не работает на этой странице"
+    },
+    "whitelistedNotice": {
+        "message": "Этот сайт в списке исключений"
+    },
+    "exceptionsTitle": {
+        "message": "Исключения"
+    },
+    "addCurrentSite": {
+        "message": "Добавить текущий сайт"
+    },
+    "alreadyInList": {
+        "message": "Уже в списке исключений"
+    },
+    "cantAddPage": {
+        "message": "Невозможно добавить эту страницу"
+    },
+    "domainPlaceholder": {
+        "message": "www.example.com"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "स्क्रॉलबार छिपाएं",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "क्लीनर इंटरफ़ेस के लिए अधिकांश वेबसाइटों पर स्वचालित रूप से स्क्रॉलबार छुपाता है।",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "मुझे स्क्रॉलबार पसंद नहीं है"
+    },
+    "restrictedNotice": {
+        "message": "एक्सटेंशन इस पृष्ठ पर काम नहीं कर सकता"
+    },
+    "whitelistedNotice": {
+        "message": "यह साइट अपवाद सूची में है"
+    },
+    "exceptionsTitle": {
+        "message": "अपवाद"
+    },
+    "addCurrentSite": {
+        "message": "वर्तमान साइट जोड़ें"
+    },
+    "alreadyInList": {
+        "message": "पहले से ही अपवाद सूची में है"
+    },
+    "cantAddPage": {
+        "message": "इस पृष्ठ को नहीं जोड़ा जा सकता"
+    },
+    "domainPlaceholder": {
+        "message": "www.example.com"
+    }
+}

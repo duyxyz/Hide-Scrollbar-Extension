@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "إخفاء شريط التمرير",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "إخفاء شريط التمرير تلقائيًا في معظم مواقع الويب للحصول على واجهة أنظف.",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "أنا لا أحب شريط التمرير"
+    },
+    "restrictedNotice": {
+        "message": "لا يمكن للإضافة العمل في هذه الصفحة"
+    },
+    "whitelistedNotice": {
+        "message": "هذا الموقع في قائمة الاستثناءات"
+    },
+    "exceptionsTitle": {
+        "message": "الاستثناءات"
+    },
+    "addCurrentSite": {
+        "message": "إضافة الموقع الحالي"
+    },
+    "alreadyInList": {
+        "message": "موجود بالفعل في قائمة الاستثناءات"
+    },
+    "cantAddPage": {
+        "message": "لا يمكن إضافة هذه الصفحة"
+    },
+    "domainPlaceholder": {
+        "message": "www.example.com"
+    }
+}

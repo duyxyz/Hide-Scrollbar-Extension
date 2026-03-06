@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!currentHostname) {
       whitelistedNotice.style.display = 'none';
       addCurrentBtn.disabled = true;
-      addCurrentBtn.textContent = 'Can\'t add this page';
+      addCurrentBtn.textContent = chrome.i18n.getMessage("cantAddPage");
       return;
     }
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (inList) {
       addCurrentBtn.disabled = true;
-      addCurrentBtn.textContent = 'Already in exception list';
+      addCurrentBtn.textContent = chrome.i18n.getMessage("alreadyInList");
     } else {
       addCurrentBtn.disabled = false;
       addCurrentBtn.textContent = currentHostname;
@@ -141,6 +141,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Init --------------------------------------------------------------
+
+  // Localize UI
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const msg = chrome.i18n.getMessage(el.getAttribute('data-i18n'));
+    if (msg) el.textContent = msg;
+  });
+  const textarea = document.getElementById('whitelistTextarea');
+  if (textarea) {
+    textarea.placeholder = chrome.i18n.getMessage("domainPlaceholder");
+  }
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tabUrl = tabs[0]?.url || '';

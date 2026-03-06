@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "ซ่อนแถบเลื่อน",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "ซ่อนแถบเลื่อนบนเว็บไซต์ส่วนใหญ่โดยอัตโนมัติเพื่ออินเทอร์เฟซที่สะอาดยิ่งขึ้น พร้อมการรองรับการสลับและรายการที่อนุญาต",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "ฉันไม่ชอบแถบเลื่อน"
+    },
+    "restrictedNotice": {
+        "message": "ส่วนขยายไม่สามารถทำงานบนหน้านี้ได้"
+    },
+    "whitelistedNotice": {
+        "message": "ไซต์นี้อยู่ในรายการข้อยกเว้น"
+    },
+    "exceptionsTitle": {
+        "message": "ข้อยกเว้น"
+    },
+    "addCurrentSite": {
+        "message": "เพิ่มไซต์ปัจจุบัน"
+    },
+    "alreadyInList": {
+        "message": "อยู่ในรายการข้อยกเว้นแล้ว"
+    },
+    "cantAddPage": {
+        "message": "ไม่สามารถเพิ่มหน้านี้ได้"
+    },
+    "domainPlaceholder": {
+        "message": "www.example.co.th"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Bildlaufleiste ausblenden",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Blendet die Bildlaufleiste auf den meisten Websites für eine sauberere Benutzeroberfläche automatisch aus.",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "Ich mag keine Bildlaufleisten"
+    },
+    "restrictedNotice": {
+        "message": "Die Erweiterung funktioniert auf dieser Seite nicht"
+    },
+    "whitelistedNotice": {
+        "message": "Diese Seite ist in der Ausnahmeliste"
+    },
+    "exceptionsTitle": {
+        "message": "Ausnahmen"
+    },
+    "addCurrentSite": {
+        "message": "Aktuelle Seite hinzufügen"
+    },
+    "alreadyInList": {
+        "message": "Bereits in der Ausnahmeliste"
+    },
+    "cantAddPage": {
+        "message": "Diese Seite kann nicht hinzugefügt werden"
+    },
+    "domainPlaceholder": {
+        "message": "www.beispiel.de"
+    }
+}

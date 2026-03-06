@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Ẩn Thanh Cuộn",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Tự động ẩn thanh cuộn trên hầu hết các trang web để có giao diện gọn gàng hơn. Bao gồm nút bật/tắt và danh sách ngoại lệ.",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "Mình ghét thanh cuộn"
+    },
+    "restrictedNotice": {
+        "message": "Tiện ích không hoạt động trên trang này"
+    },
+    "whitelistedNotice": {
+        "message": "Trang web này nằm trong danh sách ngoại lệ"
+    },
+    "exceptionsTitle": {
+        "message": "Ngoại lệ"
+    },
+    "addCurrentSite": {
+        "message": "Thêm trang hiện tại"
+    },
+    "alreadyInList": {
+        "message": "Đã có trong danh sách ngoại lệ"
+    },
+    "cantAddPage": {
+        "message": "Không thể thêm trang này"
+    },
+    "domainPlaceholder": {
+        "message": "www.vidu.com"
+    }
+}

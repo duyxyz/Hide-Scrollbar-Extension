@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Ocultar barra de rolagem",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Oculta automaticamente a barra de rolagem na maioria dos sites para uma interface mais limpa.",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "Eu não gosto da barra de rolagem"
+    },
+    "restrictedNotice": {
+        "message": "A extensão não pode funcionar nesta página"
+    },
+    "whitelistedNotice": {
+        "message": "Este site está na lista de exceções"
+    },
+    "exceptionsTitle": {
+        "message": "Exceções"
+    },
+    "addCurrentSite": {
+        "message": "Adicionar site atual"
+    },
+    "alreadyInList": {
+        "message": "Já está na lista de exceções"
+    },
+    "cantAddPage": {
+        "message": "Não é possível adicionar esta página"
+    },
+    "domainPlaceholder": {
+        "message": "www.exemplo.com"
+    }
+}

@@ -14,26 +14,28 @@
 
 <body>
   <div class="header">
-    <h1>I don't like scrollbar</h1>
+    <h1 data-i18n="title">I don't like scrollbar</h1>
     <label class="switch">
       <input type="checkbox" id="toggleScroll" aria-label="Toggle hiding scrollbar">
       <span class="slider"></span>
     </label>
   </div>
 
-  <div id="restrictedNotice" class="restricted-notice">
+  <div id="restrictedNotice" class="restricted-notice" data-i18n="restrictedNotice">
     Extension can't work on this page
   </div>
 
-  <div id="whitelistedNotice" class="whitelisted-notice">
+  <div id="whitelistedNotice" class="whitelisted-notice" data-i18n="whitelistedNotice">
     This site is in the exception list
   </div>
 
-  <div class="section-title">Exceptions <span id="exceptionCount" class="exception-count"></span></div>
-  <button id="addCurrentBtn" class="add-current-btn">Add current site</button>
+  <div class="section-title">
+    <span data-i18n="exceptionsTitle">Exceptions</span>
+    <span id="exceptionCount" class="exception-count"></span>
+  </div>
+  <button id="addCurrentBtn" class="add-current-btn" data-i18n="addCurrentSite">Add current site</button>
 
-  <textarea id="whitelistTextarea" class="whitelist-textarea" placeholder="www.example.com"
-    spellcheck="false"></textarea>
+  <textarea id="whitelistTextarea" class="whitelist-textarea" spellcheck="false"></textarea>
 
   <script src="popup.js"></script>
 </body>

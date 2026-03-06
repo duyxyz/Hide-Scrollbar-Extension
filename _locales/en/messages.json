@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Hide Scrollbar",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Automatically hides the scrollbar on most websites for a cleaner interface, with toggle and whitelist support.",
+        "description": "Description of the extension"
+    },
+    "title": {
+        "message": "I don't like scrollbar"
+    },
+    "restrictedNotice": {
+        "message": "Extension can't work on this page"
+    },
+    "whitelistedNotice": {
+        "message": "This site is in the exception list"
+    },
+    "exceptionsTitle": {
+        "message": "Exceptions"
+    },
+    "addCurrentSite": {
+        "message": "Add current site"
+    },
+    "alreadyInList": {
+        "message": "Already in exception list"
+    },
+    "cantAddPage": {
+        "message": "Can't add this page"
+    },
+    "domainPlaceholder": {
+        "message": "www.example.com"
+    }
+}
