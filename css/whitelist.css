@@ -41,6 +41,9 @@
 .add-current-btn:disabled {
     opacity: 0.5;
     cursor: default;
+    background: var(--secondary-bg);
+    border-color: var(--border);
+    color: var(--muted);
 }
 
 /* Whitelist Textarea */

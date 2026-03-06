@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (inList) {
       addCurrentBtn.disabled = true;
-      addCurrentBtn.textContent = '✓ Already in exception list';
+      addCurrentBtn.textContent = 'Already in exception list';
     } else {
       addCurrentBtn.disabled = false;
       addCurrentBtn.textContent = currentHostname;
