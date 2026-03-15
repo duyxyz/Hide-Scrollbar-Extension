@@ -1,0 +1,53 @@
+name: Release Chrome Extension
+
+on:
+  push:
+    branches:
+      - main
+      - master # In case the default branch is named master
+    paths-ignore:
+      - 'README.md'
+      - '.github/**' # Prevent infinite loops if just tweaking the action
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Update manifest version
+        id: version
+        run: |
+          # Dùng jq để lấy phiên bản gốc và thêm số hiệu của GitHub Action run
+          BASE_VERSION=$(jq -r '.version' manifest.json)
+          NEW_VERSION="${BASE_VERSION}.${{ github.run_number }}"
+          echo "Updating version from $BASE_VERSION to $NEW_VERSION"
+          
+          # Cập nhật manifest.json 
+          jq ".version = \"$NEW_VERSION\"" manifest.json > tmp.json && mv tmp.json manifest.json
+          
+          # Lưu version vào biến môi trường để dùng cho bước sau
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          
+          # Cập nhật file cục bộ trong worker (chỉ phục vụ cho việc nén zip)
+          # Lưu ý: Nó không push ngược code này lại kho Github để tránh conflict
+      
+      - name: Create Zip Archive
+        run: |
+          # Nén các file cần thiết, loại bỏ các file không thuộc về extension
+          zip -r extension-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "tmp.json"
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          files: extension-v${{ env.VERSION }}.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
