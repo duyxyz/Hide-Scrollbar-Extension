@@ -10,7 +10,20 @@
       style.textContent = `
         ::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
         * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
-        div[data-visualcompletion="ignore"][data-thumb="1"] { display: none !important; visibility: hidden !important; opacity: 0 !important; width: 0 !important; }
+        /* Custom scrollbars: Facebook, Spotify (OverlayScrollbars), SimpleBar, PerfectScrollbar */
+        div[data-visualcompletion="ignore"][data-thumb="1"],
+        .os-scrollbar,
+        .simplebar-scrollbar,
+        .simplebar-track,
+        .ps__rail-x,
+        .ps__rail-y,
+        .mac-scrollbar { 
+            display: none !important; 
+            visibility: hidden !important; 
+            opacity: 0 !important; 
+            width: 0 !important; 
+            height: 0 !important; 
+        }
       `;
       (document.head || document.documentElement).appendChild(style);
     } else if (!hide && style) {
