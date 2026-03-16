@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Dölj Rullningslist",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Döljer automatiskt rullningslisten på de flesta webbplatser för ett renare gränssnitt, med stöd för växling och vitlista.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Begränsad sida"
+    },
+    "whitelistedNotice": {
+        "message": "I undantagslistan"
+    },
+    "cantAddPage": {
+        "message": "Ogiltig sida"
+    },
+    "exceptionsTitle": {
+        "message": "Undantag"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Sparar..."
+    },
+    "saved": {
+        "message": "Sparad"
+    },
+    "error": {
+        "message": "Fel"
+    }
+}

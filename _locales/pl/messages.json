@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Ukryj Pasek Przewijania",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Automatycznie ukrywa pasek przewijania na większości stron internetowych, aby uzyskać czystszy interfejs, z obsługą przełączania i białej listy.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Strona z ograniczonym dostępem"
+    },
+    "whitelistedNotice": {
+        "message": "Na liście wyjątków"
+    },
+    "cantAddPage": {
+        "message": "Nieprawidłowa strona"
+    },
+    "exceptionsTitle": {
+        "message": "Wyjątki"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Zapisywanie..."
+    },
+    "saved": {
+        "message": "Zapisano"
+    },
+    "error": {
+        "message": "Błąd"
+    }
+}

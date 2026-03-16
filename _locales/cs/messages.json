@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Skrýt Posuvník",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Automaticky skryje posuvník na většině webových stránek pro čistší rozhraní s podporou přepínání a seznamu výjimek.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Omezená stránka"
+    },
+    "whitelistedNotice": {
+        "message": "V seznamu výjimek"
+    },
+    "cantAddPage": {
+        "message": "Neplatná stránka"
+    },
+    "exceptionsTitle": {
+        "message": "Výjimky"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Ukládání..."
+    },
+    "saved": {
+        "message": "Uloženo"
+    },
+    "error": {
+        "message": "Chyba"
+    }
+}

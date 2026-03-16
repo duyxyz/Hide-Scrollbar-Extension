@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Skjul Rullepanel",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Skjuler automatisk rullepanelet på de fleste hjemmesider for en renere grænseflade, med understøttelse af p/a-knap og hvidliste.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Begrænset side"
+    },
+    "whitelistedNotice": {
+        "message": "På undtagelseslisten"
+    },
+    "cantAddPage": {
+        "message": "Ugyldig side"
+    },
+    "exceptionsTitle": {
+        "message": "Undtagelser"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Gemmer..."
+    },
+    "saved": {
+        "message": "Gemt"
+    },
+    "error": {
+        "message": "Fejl"
+    }
+}

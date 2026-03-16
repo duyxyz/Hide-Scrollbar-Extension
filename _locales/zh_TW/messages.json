@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "隱藏捲軸",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "在大多數網站上自動隱藏捲軸以獲得更簡潔的介面，支援切換和白名單。",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "受限頁面"
+    },
+    "whitelistedNotice": {
+        "message": "在例外清單中"
+    },
+    "cantAddPage": {
+        "message": "無效頁面"
+    },
+    "exceptionsTitle": {
+        "message": "例外"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "儲存中..."
+    },
+    "saved": {
+        "message": "已儲存"
+    },
+    "error": {
+        "message": "錯誤"
+    }
+}

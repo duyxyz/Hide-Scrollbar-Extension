@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Приховати смугу прокрутки",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Автоматично приховує смугу прокрутки на більшості веб-сайтів для більш чистого інтерфейсу, з підтримкою перемикання та білого списку.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Обмежена сторінка"
+    },
+    "whitelistedNotice": {
+        "message": "У списку винятків"
+    },
+    "cantAddPage": {
+        "message": "Недійсна сторінка"
+    },
+    "exceptionsTitle": {
+        "message": "Винятки"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Збереження..."
+    },
+    "saved": {
+        "message": "Збережено"
+    },
+    "error": {
+        "message": "Помилка"
+    }
+}

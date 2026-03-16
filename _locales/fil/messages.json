@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Itago ang Scrollbar",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Awtomatikong itinatago ang scrollbar sa karamihan ng mga website para sa isang mas malinis na interface, na may suporta sa pag-toggle at whitelist.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Pinaghihigpitang pahina"
+    },
+    "whitelistedNotice": {
+        "message": "Nasa listahan ng mga pagbubukod"
+    },
+    "cantAddPage": {
+        "message": "Maling pahina"
+    },
+    "exceptionsTitle": {
+        "message": "Mga Pagbubukod"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Nagse-save..."
+    },
+    "saved": {
+        "message": "Nai-save"
+    },
+    "error": {
+        "message": "Error"
+    }
+}

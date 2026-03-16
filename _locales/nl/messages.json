@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Schuifbalk Verbergen",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Verbergt automatisch de schuifbalk op de meeste websites voor een strakkere interface, met ondersteuning voor in-/uitschakelen en whitelist.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Beperkte pagina"
+    },
+    "whitelistedNotice": {
+        "message": "In uitzonderingenlijst"
+    },
+    "cantAddPage": {
+        "message": "Ongeldige pagina"
+    },
+    "exceptionsTitle": {
+        "message": "Uitzonderingen"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Opslaan..."
+    },
+    "saved": {
+        "message": "Opgeslagen"
+    },
+    "error": {
+        "message": "Fout"
+    }
+}

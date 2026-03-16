@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Ascunde Bara de Defilare",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Ascunde automat bara de defilare pe majoritatea site-urilor web pentru o interfață mai curată, cu suport pentru comutare și listă albă.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Pagină restricționată"
+    },
+    "whitelistedNotice": {
+        "message": "În lista de excepții"
+    },
+    "cantAddPage": {
+        "message": "Pagină invalidă"
+    },
+    "exceptionsTitle": {
+        "message": "Excepții"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Se salvează..."
+    },
+    "saved": {
+        "message": "Salvat"
+    },
+    "error": {
+        "message": "Eroare"
+    }
+}

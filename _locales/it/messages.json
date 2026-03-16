@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Nascondi barra di scorrimento",
+        "description": "Name of the extension"
+    },
+    "extDesc": {
+        "message": "Nasconde automaticamente la barra di scorrimento sulla maggior parte dei siti web per un'interfaccia più pulita, con supporto per interruttore e lista di eccezioni.",
+        "description": "Description of the extension"
+    },
+    "restrictedNotice": {
+        "message": "Pagina limitata"
+    },
+    "whitelistedNotice": {
+        "message": "Nell'elenco delle eccezioni"
+    },
+    "cantAddPage": {
+        "message": "Pagina non valida"
+    },
+    "exceptionsTitle": {
+        "message": "Eccezioni"
+    },
+    "domainPlaceholder": {
+        "message": "example.com"
+    },
+    "saving": {
+        "message": "Salvataggio..."
+    },
+    "saved": {
+        "message": "Salvato"
+    },
+    "error": {
+        "message": "Errore"
+    }
+}
