@@ -20,13 +20,17 @@
 
   const isWhitelisted = (whitelist) => {
     const hostname = window.location.hostname;
-    return whitelist.some(
-      (domain) => hostname === domain || hostname.endsWith('.' + domain)
-    );
+    
+    // Exact match using Set for O(1) lookup
+    const whitelistSet = new Set(whitelist);
+    if (whitelistSet.has(hostname)) return true;
+    
+    // Suffix match for subdomains
+    return whitelist.some(domain => hostname.endsWith('.' + domain));
   };
 
   const update = () => {
-    chrome.storage.sync.get(
+    chrome.storage.local.get(
       { scrollbarHidden: true, whitelist: [] },
       (res) => {
         if (chrome.runtime.lastError) return;
@@ -39,7 +43,7 @@
   update();
 
   // React to storage changes in real-time
-  chrome.storage.onChanged.addListener((changes) => {
-    if (changes.scrollbarHidden || changes.whitelist) update();
+  chrome.storage.onChanged.addListener((changes, namespace) => {
+    if (namespace === 'local' && (changes.scrollbarHidden || changes.whitelist)) update();
   });
 })();

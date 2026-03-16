@@ -41,10 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Helpers -----------------------------------------------------------
 
-  const isWhitelisted = (whitelist) =>
-    whitelist.some(
-      (d) => currentHostname === d || currentHostname.endsWith('.' + d)
-    );
+  const isWhitelisted = (whitelist) => {
+    // Exact match using Set for O(1) lookup
+    const whitelistSet = new Set(whitelist);
+    if (whitelistSet.has(currentHostname)) return true;
+    
+    // Suffix match for subdomains
+    return whitelist.some(d => currentHostname.endsWith('.' + d));
+  };
 
   const updateNotice = (whitelist) => {
     if (!currentHostname) {

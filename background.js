@@ -1,10 +1,7 @@
 // background.js — Service Worker: Badge icon management
 const RESTRICTED = ['chrome:', 'chrome-extension:', 'edge:', 'about:', 'view-source:', 'devtools:'];
 
-const updateBadge = async (tabId) => {
-    const { scrollbarHidden = true, whitelist = [] } =
-        await chrome.storage.sync.get(['scrollbarHidden', 'whitelist']);
-
+const updateBadge = async (tabId, scrollbarHidden, whitelist) => {
     let isWhitelisted = false;
     let restricted = false;
 
@@ -38,20 +35,36 @@ const updateBadge = async (tabId) => {
     });
 };
 
+const updateBadgeForTab = async (tabId) => {
+    const { scrollbarHidden = true, whitelist = [] } =
+        await chrome.storage.sync.get(['scrollbarHidden', 'whitelist']);
+    await updateBadge(tabId, scrollbarHidden, whitelist);
+};
+
+// Update ALL tabs when the user changes settings or whitelist
+const updateAllTabs = async () => {
+    const { scrollbarHidden = true, whitelist = [] } =
+        await chrome.storage.sync.get(['scrollbarHidden', 'whitelist']);
+    
+    // Sync to local storage for faster content script access
+    await chrome.storage.local.set({ scrollbarHidden, whitelist });
+
+    chrome.tabs.query({}, (tabs) => {
+        tabs.forEach((t) => updateBadge(t.id, scrollbarHidden, whitelist));
+    });
+};
+
 // Update badge when switching tabs
-chrome.tabs.onActivated.addListener(({ tabId }) => updateBadge(tabId));
+chrome.tabs.onActivated.addListener(({ tabId }) => updateBadgeForTab(tabId));
 
 // Update badge when a tab finishes loading (URL may have changed)
 chrome.tabs.onUpdated.addListener((tabId, info) => {
-    if (info.status === 'complete') updateBadge(tabId);
+    if (info.status === 'complete') updateBadgeForTab(tabId);
 });
 
-// Update ALL tabs when the user changes settings or whitelist
-chrome.storage.onChanged.addListener(() => {
-    chrome.tabs.query({}, (tabs) => tabs.forEach((t) => updateBadge(t.id)));
+chrome.storage.onChanged.addListener((changes, namespace) => {
+    if (namespace === 'sync') updateAllTabs();
 });
 
 // Set correct badge on every tab when extension is installed / reloaded
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.tabs.query({}, (tabs) => tabs.forEach((t) => updateBadge(t.id)));
-});
+chrome.runtime.onInstalled.addListener(updateAllTabs);
