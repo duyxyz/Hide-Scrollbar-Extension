@@ -20,12 +20,12 @@ jobs:
         id: version
         run: |
           # Dùng jq để lấy phiên bản gốc và thêm số hiệu của GitHub Action run
-          BASE_VERSION=$(jq -r '.version' manifest.json)
+          BASE_VERSION=$(jq -r '.version' manifest.chromium.json)
           NEW_VERSION="${BASE_VERSION}.${{ github.run_number }}"
           echo "Updating version from $BASE_VERSION to $NEW_VERSION"
           
-          # Cập nhật manifest.json (Chrome)
-          jq ".version = \"$NEW_VERSION\"" manifest.json > tmp.json && mv tmp.json manifest.json
+          # Cập nhật manifest.chromium.json (Chrome)
+          jq ".version = \"$NEW_VERSION\"" manifest.chromium.json > tmp.json && mv tmp.json manifest.chromium.json
           
           # Cập nhật manifest.firefox.json (Firefox)
           jq ".version = \"$NEW_VERSION\"" manifest.firefox.json > tmp.json && mv tmp.json manifest.firefox.json
@@ -39,10 +39,16 @@ jobs:
       - name: Create Zip Archives
         run: |
           # --- BUILD CHROME VERSION ---
+          # Đổi tên manifest.chromium.json thành manifest.json chuẩn
+          mv manifest.chromium.json manifest.json
+          
           # Nén tất cả thành 1 file zip, ngoại trừ manifest của Firefox
           zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.firefox.json" "tmp.json" "build.ps1"
           
           # --- BUILD FIREFOX VERSION ---
+          # Xoá manifest.json của Chrome
+          rm manifest.json
+          
           # Đổi tên manifest.firefox.json thành manifest.json chuẩn cho Add-on
           mv manifest.firefox.json manifest.json
           
@@ -50,7 +56,7 @@ jobs:
           mogrify -resize 48x48 icons/icon48.png
           mogrify -resize 128x128 icons/icon128.png
           
-          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.firefox.json" "tmp.json" "build.ps1"
+          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.chromium.json" "tmp.json" "build.ps1"
           
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
