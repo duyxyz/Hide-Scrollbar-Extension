@@ -152,7 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleWhitelist.addEventListener('click', async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (tab) {
-      await chrome.sidePanel.open({ tabId: tab.id });
+      if (chrome.sidePanel && chrome.sidePanel.open) {
+        // Chromium
+        await chrome.sidePanel.open({ tabId: tab.id });
+      } else if (typeof browser !== 'undefined' && browser.sidebarAction && browser.sidebarAction.open) {
+        // Firefox
+        await browser.sidebarAction.open();
+      } else if (chrome.sidebarAction && chrome.sidebarAction.open) {
+        // Firefox polyfill behavior
+        await chrome.sidebarAction.open();
+      }
       window.close();
     }
   });

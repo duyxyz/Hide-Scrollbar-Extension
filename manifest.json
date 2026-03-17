@@ -4,6 +4,11 @@
   "version": "2.1",
   "description": "__MSG_extDesc__",
   "default_locale": "en",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "hide-scrollbar-ext@duyxyz"
+    }
+  },
   "icons": {
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
@@ -22,7 +27,13 @@
   "side_panel": {
     "default_path": "sidepanel.html"
   },
+  "sidebar_action": {
+    "default_panel": "sidepanel.html"
+  },
   "background": {
+    "scripts": [
+      "background.js"
+    ],
     "service_worker": "background.js"
   },
   "content_scripts": [
