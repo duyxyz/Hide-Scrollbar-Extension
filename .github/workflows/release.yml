@@ -49,7 +49,7 @@ jobs:
           # Đổi tên manifest.firefox.json thành manifest.json chuẩn cho Add-on
           mv manifest.firefox.json manifest.json
           
-          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.chromium.json" "tmp.json" "build.ps1"
+          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.chromium.json" "tmp.json" "build.ps1" "*.zip"
           
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
