@@ -33,6 +33,9 @@ jobs:
           # Cập nhật file cục bộ trong worker (chỉ phục vụ cho việc nén zip)
           # Lưu ý: Nó không push ngược code này lại kho Github để tránh conflict
       
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
       - name: Create Zip Archives
         run: |
           # Sao lưu manifest.json gốc
