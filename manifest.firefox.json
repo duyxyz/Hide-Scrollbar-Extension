@@ -6,7 +6,7 @@
   "default_locale": "en",
   "browser_specific_settings": {
     "gecko": {
-      "id": "hide-scrollbar-ext@duyxyz",
+      "id": "hide-scrollbar-official@duyxyz",
       "strict_min_version": "142.0",
       "data_collection_permissions": {
         "required": [
