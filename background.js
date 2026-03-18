@@ -1,5 +1,6 @@
 // background.js — Service Worker: Badge icon management
 const RESTRICTED = ['chrome:', 'chrome-extension:', 'edge:', 'about:', 'view-source:', 'devtools:'];
+const RESTRICTED_HOSTS = ['chrome.google.com', 'chromewebstore.google.com'];
 
 const updateBadge = async (tabId, scrollbarHidden, whitelist) => {
     let isWhitelisted = false;
@@ -9,7 +10,7 @@ const updateBadge = async (tabId, scrollbarHidden, whitelist) => {
         const tab = await chrome.tabs.get(tabId);
         if (tab.url) {
             const parsed = new URL(tab.url);
-            if (RESTRICTED.includes(parsed.protocol) || parsed.hostname === 'chrome.google.com') {
+            if (RESTRICTED.includes(parsed.protocol) || RESTRICTED_HOSTS.includes(parsed.hostname)) {
                 restricted = true;
             } else {
                 const hostname = parsed.hostname;
@@ -66,5 +67,9 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'sync') updateAllTabs();
 });
 
+chrome.runtime.onStartup.addListener(updateAllTabs);
+
 // Set correct badge on every tab when extension is installed / reloaded
 chrome.runtime.onInstalled.addListener(updateAllTabs);
+
+updateAllTabs().catch(() => {});

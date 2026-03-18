@@ -15,13 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let isRestricted = false;
 
   const RESTRICTED_PROTOCOLS = ['chrome:', 'chrome-extension:', 'edge:', 'about:', 'view-source:', 'devtools:'];
+  const RESTRICTED_HOSTS = ['chrome.google.com', 'chromewebstore.google.com'];
 
   const checkRestricted = (url) => {
     if (!url) return true;
     try {
       const parsed = new URL(url);
       if (RESTRICTED_PROTOCOLS.includes(parsed.protocol)) return true;
-      if (parsed.hostname === 'chrome.google.com') return true;
+      if (RESTRICTED_HOSTS.includes(parsed.hostname)) return true;
     } catch (_) {
       return true;
     }
@@ -120,6 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/^(https?:\/\/)?(www\.)?/, '')
       .replace(/\/.*$/, '');
 
+  const normalizeWhitelist = (domains) =>
+    [...new Set(
+      (Array.isArray(domains) ? domains : [])
+        .map((domain) => sanitizeDomain(String(domain)))
+        .filter((domain) => domain)
+    )].sort();
+
 
 
   const addDomain = (raw) => {
@@ -194,12 +202,24 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.onload = (event) => {
       try {
         const data = JSON.parse(event.target.result);
-        if (!data.whitelist || !Array.isArray(data.whitelist)) return;
+        if (!data || !Array.isArray(data.whitelist)) return;
+
+        const nextState = {
+          whitelist: normalizeWhitelist(data.whitelist),
+        };
+
+        if (typeof data.scrollbarHidden === 'boolean') {
+          nextState.scrollbarHidden = data.scrollbarHidden;
+        }
 
         chrome.storage.sync.get({ whitelist: [] }, (current) => {
-          const merged = [...new Set([...current.whitelist, ...data.whitelist])].sort();
-          
-          chrome.storage.sync.set({ ...data, whitelist: merged }, () => {
+          if (chrome.runtime.lastError) return;
+          const merged = normalizeWhitelist([
+            ...current.whitelist,
+            ...nextState.whitelist,
+          ]);
+
+          chrome.storage.sync.set({ ...nextState, whitelist: merged }, () => {
             if (chrome.runtime.lastError) return;
             loadState(); // Refresh UI
           });
