@@ -20,7 +20,7 @@
         "message": "Undantag"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Sparar..."

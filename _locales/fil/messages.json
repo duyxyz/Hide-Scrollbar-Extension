@@ -20,7 +20,7 @@
         "message": "Mga Pagbubukod"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Nagse-save..."

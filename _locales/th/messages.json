@@ -20,7 +20,7 @@
         "message": "ข้อยกเว้น"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "กำลังบันทึก..."

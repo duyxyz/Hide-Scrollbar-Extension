@@ -20,7 +20,7 @@
         "message": "अपवाद"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "सहेजा जा रहा है..."

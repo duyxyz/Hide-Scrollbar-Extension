@@ -20,7 +20,7 @@
         "message": "Винятки"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Збереження..."

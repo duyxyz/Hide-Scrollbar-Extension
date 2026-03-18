@@ -20,7 +20,7 @@
         "message": "例外列表"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "正在保存..."

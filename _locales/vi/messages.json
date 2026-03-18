@@ -20,7 +20,7 @@
         "message": "Danh sách ngoại lệ"
     },
     "domainPlaceholder": {
-        "message": "vidu.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Đang lưu..."

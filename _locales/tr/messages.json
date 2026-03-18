@@ -20,7 +20,7 @@
         "message": "İstisnalar"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Kaydediliyor..."

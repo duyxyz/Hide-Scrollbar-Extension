@@ -20,7 +20,7 @@
         "message": "Excepciones"
     },
     "domainPlaceholder": {
-        "message": "ejemplo.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Guardando..."

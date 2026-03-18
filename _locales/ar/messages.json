@@ -20,7 +20,7 @@
         "message": "الاستثناءات"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "جاري الحفظ..."

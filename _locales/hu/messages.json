@@ -20,7 +20,7 @@
         "message": "Kivételek"
     },
     "domainPlaceholder": {
-        "message": "example.com"
+        "message": "https://www.example.com/"
     },
     "saving": {
         "message": "Mentés..."
