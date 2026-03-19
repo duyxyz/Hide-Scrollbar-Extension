@@ -1,8 +1,90 @@
+# Hide Scrollbar Extension
 
-| Browser   | Install from ... |
-| :-------: | ---------------- | 
-| <img src="https://github.com/user-attachments/assets/b0136512-56a5-4856-8c50-4971c957a24f" alt="Get uBlock Origin for Firefox"> | <a href="https://addons.mozilla.org/addon/ublock-origin/">Firefox Add-ons</a> | 
-| <img src="https://github.com/user-attachments/assets/3a7569f8-688b-4eb1-a643-8d0fe173aefe" alt="Get uBlock Origin for Microsoft Edge"> | <a href="https://microsoftedge.microsoft.com/addons/detail/ublock-origin/odfafepnkmbhccpbejgmiehpchacaeak">Edge Add-ons</a> |
-| <img src="https://github.com/user-attachments/assets/938f080c-fe64-4e48-8b89-4bfceabb56e6" alt="Get uBlock Origin for Opera"> | <a href="https://addons.opera.com/extensions/details/ublock/">Opera Add-ons</a> |
-| <img src="https://github.com/user-attachments/assets/5463ef88-873b-4516-8514-5277664cfde7" alt="Get uBlock Origin for Chromium"> | <a href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm">Chrome Web Store</a> | 
-| <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" height="50" alt="Get uBlock Origin through GitHub"> | <a href="https://github.com/gorhill/uBlock/releases">GitHub - Releases</a> | 
+Browser extension to hide scrollbars on websites while keeping page scrolling usable.
+
+It supports:
+- Chromium-based browsers
+- Firefox
+- Per-site whitelist
+- Popup toggle
+- Side panel for editing exceptions
+- Import/export of saved settings
+
+## Project Structure
+
+```text
+platform/
+  chromium/manifest.json
+  firefox/manifest.json
+
+src/
+  entries/
+    background.js
+    content.js
+  features/
+    popup/
+      popup.html
+      popup.js
+    sidepanel/
+      sidepanel.html
+      sidepanel.js
+    whitelist/
+      whitelist-service.js
+  shared/
+    i18n.js
+
+assets/
+  icons/
+  styles/
+
+_locales/
+scripts/
+test-builds/
+```
+
+## Development Workflow
+
+Source files live in:
+- `src/`
+- `assets/`
+- `platform/`
+- `_locales/`
+
+Test-ready extension folders are generated in:
+- `test-builds/chromium`
+- `test-builds/firefox`
+
+These test folders are ignored by Git and can be recreated at any time.
+
+## VS Code Run Buttons
+
+The workspace includes Run/Task entries for development:
+
+- `Run: Refresh + Validate Test Builds`
+- `Run: Refresh Test Builds`
+- `Run: Validate Test Builds`
+
+Recommended flow:
+
+1. Edit source files.
+2. Run `Refresh + Validate Test Builds`.
+3. Load unpacked extension from `test-builds/chromium` or `test-builds/firefox`.
+
+## Scripts
+
+- `scripts/refresh-test-builds.ps1`
+  Rebuilds both test folders from the current source.
+
+- `scripts/validate-test-builds.ps1`
+  Checks that generated test builds contain the files referenced by each manifest.
+
+- `scripts/refresh-and-validate-test-builds.ps1`
+  Runs refresh first, then validation.
+
+## Packaging
+
+Browser-specific manifests are stored in:
+- `platform/chromium/manifest.json`
+- `platform/firefox/manifest.json`
+
+The GitHub workflow builds release archives from those manifests.
