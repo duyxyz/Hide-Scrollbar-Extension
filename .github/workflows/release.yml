@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - master # In case the default branch is named master
+      - master
 
 permissions:
   contents: write
@@ -19,38 +19,27 @@ jobs:
       - name: Update manifest versions
         id: version
         run: |
-          # Dùng jq để lấy phiên bản gốc và thêm số hiệu của GitHub Action run
-          BASE_VERSION=$(jq -r '.version' manifest.chromium.json)
+          BASE_VERSION=$(jq -r '.version' platform/chromium/manifest.json)
           NEW_VERSION="${BASE_VERSION}.${{ github.run_number }}"
           echo "Updating version from $BASE_VERSION to $NEW_VERSION"
-          
-          # Cập nhật manifest.chromium.json (Chrome)
-          jq ".version = \"$NEW_VERSION\"" manifest.chromium.json > tmp.json && mv tmp.json manifest.chromium.json
-          
-          # Cập nhật manifest.firefox.json (Firefox)
-          jq ".version = \"$NEW_VERSION\"" manifest.firefox.json > tmp.json && mv tmp.json manifest.firefox.json
-          
-          # Lưu version vào biến môi trường để dùng cho bước sau
+
+          jq ".version = \"$NEW_VERSION\"" platform/chromium/manifest.json > tmp.json && mv tmp.json platform/chromium/manifest.json
+          jq ".version = \"$NEW_VERSION\"" platform/firefox/manifest.json > tmp.json && mv tmp.json platform/firefox/manifest.json
+
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
-      
+
       - name: Create Zip Archives
         run: |
-          # --- BUILD CHROME VERSION ---
-          # Đổi tên manifest.chromium.json thành manifest.json chuẩn
-          mv manifest.chromium.json manifest.json
-          
-          # Nén tất cả thành 1 file zip, ngoại trừ manifest của Firefox
-          zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.firefox.json" "tmp.json" "build.ps1"
-          
-          # --- BUILD FIREFOX VERSION ---
-          # Xoá manifest.json của Chrome
+          cp platform/chromium/manifest.json manifest.json
+          zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "tmp.json" "build.ps1" "platform/*" "*.zip"
+
           rm manifest.json
-          
-          # Đổi tên manifest.firefox.json thành manifest.json chuẩn cho Add-on
-          mv manifest.firefox.json manifest.json
-          
-          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "manifest.chromium.json" "tmp.json" "build.ps1" "*.zip"
-          
+
+          cp platform/firefox/manifest.json manifest.json
+          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "tmp.json" "build.ps1" "platform/*" "*.zip"
+
+          rm manifest.json
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
