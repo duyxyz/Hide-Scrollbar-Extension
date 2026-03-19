@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Ukryj Pasek Przewijania",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Automatycznie ukrywa pasek przewijania na większości stron internetowych, aby uzyskać czystszy interfejs, z obsługą przełączania i białej listy.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Strona z ograniczonym dostępem"
-    },
-    "whitelistedNotice": {
-        "message": "Na liście wyjątków"
-    },
-    "cantAddPage": {
-        "message": "Nieprawidłowa strona"
-    },
-    "exceptionsTitle": {
-        "message": "Wyjątki"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Zapisywanie..."
-    },
-    "saved": {
-        "message": "Zapisano"
-    },
-    "error": {
-        "message": "Błąd"
-    }
+    "extName":  {
+                    "message":  "Ukryj Pasek Przewijania",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Automatycznie ukrywa pasek przewijania na większości stron internetowych, aby uzyskać czystszy interfejs, z obsługą przełączania i białej listy.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Strona z ograniczonym dostępem"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Na liście wyjątków"
+                          },
+    "cantAddPage":  {
+                        "message":  "Nieprawidłowa strona"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Wyjątki"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Zapisywanie..."
+               },
+    "saved":  {
+                  "message":  "Zapisano"
+              },
+    "error":  {
+                  "message":  "Błąd"
+              },
+    "addCurrentHost":  {
+                           "message":  "Dodaj witrynę do białej listy"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Usuń witrynę z białej listy"
+                          },
+    "exportData":  {
+                       "message":  "Eksportuj dane"
+                   },
+    "importData":  {
+                       "message":  "Importuj dane"
+                   },
+    "openExceptions":  {
+                           "message":  "Otwórz wyjątki"
+                       }
 }

@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Ocultar barra de rolagem",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Oculta automaticamente a barra de rolagem na maioria dos sites para uma interface mais limpa.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Página restrita"
-    },
-    "whitelistedNotice": {
-        "message": "Lista de exceções"
-    },
-    "cantAddPage": {
-        "message": "Página inválida"
-    },
-    "exceptionsTitle": {
-        "message": "Exceções"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Salvando..."
-    },
-    "saved": {
-        "message": "Salvo"
-    },
-    "error": {
-        "message": "Erro"
-    }
+    "extName":  {
+                    "message":  "Ocultar barra de rolagem",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Oculta automaticamente a barra de rolagem na maioria dos sites para uma interface mais limpa.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Página restrita"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Lista de exceções"
+                          },
+    "cantAddPage":  {
+                        "message":  "Página inválida"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Exceções"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Salvando..."
+               },
+    "saved":  {
+                  "message":  "Salvo"
+              },
+    "error":  {
+                  "message":  "Erro"
+              },
+    "addCurrentHost":  {
+                           "message":  "Adicionar site à lista de permissões"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Remover site da lista de permissões"
+                          },
+    "exportData":  {
+                       "message":  "Exportar dados"
+                   },
+    "importData":  {
+                       "message":  "Importar dados"
+                   },
+    "openExceptions":  {
+                           "message":  "Abrir exceções"
+                       }
 }

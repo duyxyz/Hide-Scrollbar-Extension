@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Απόκρυψη Γραμμής Κύλισης",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Αποκρύπτει αυτόματα τη γραμμή κύλισης στους περισσότερους ιστότοπους για μια πιο καθαρή διεπαφή, με υποστήριξη εναλλαγής και λίστας εξαιρέσεων.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Περιορισμένη σελίδα"
-    },
-    "whitelistedNotice": {
-        "message": "Στη λίστα εξαιρέσεων"
-    },
-    "cantAddPage": {
-        "message": "Μη έγκυρη σελίδα"
-    },
-    "exceptionsTitle": {
-        "message": "Εξαιρέσεις"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Αποθήκευση..."
-    },
-    "saved": {
-        "message": "Αποθηκεύτηκε"
-    },
-    "error": {
-        "message": "Σφάλμα"
-    }
+    "extName":  {
+                    "message":  "Απόκρυψη Γραμμής Κύλισης",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Αποκρύπτει αυτόματα τη γραμμή κύλισης στους περισσότερους ιστότοπους για μια πιο καθαρή διεπαφή, με υποστήριξη εναλλαγής και λίστας εξαιρέσεων.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Περιορισμένη σελίδα"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Στη λίστα εξαιρέσεων"
+                          },
+    "cantAddPage":  {
+                        "message":  "Μη έγκυρη σελίδα"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Εξαιρέσεις"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Αποθήκευση..."
+               },
+    "saved":  {
+                  "message":  "Αποθηκεύτηκε"
+              },
+    "error":  {
+                  "message":  "Σφάλμα"
+              },
+    "addCurrentHost":  {
+                           "message":  "Προσθήκη ιστοτόπου στη λίστα εξαιρέσεων"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Αφαίρεση ιστοτόπου από τη λίστα εξαιρέσεων"
+                          },
+    "exportData":  {
+                       "message":  "Εξαγωγή δεδομένων"
+                   },
+    "importData":  {
+                       "message":  "Εισαγωγή δεδομένων"
+                   },
+    "openExceptions":  {
+                           "message":  "Άνοιγμα εξαιρέσεων"
+                       }
 }

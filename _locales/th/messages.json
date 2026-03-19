@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "ซ่อนแถบเลื่อน",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "ซ่อนแถบเลื่อนบนเว็บไซต์ส่วนใหญ่โดยอัตโนมัติเพื่ออินเทอร์เฟซที่สะอาดยิ่งขึ้น พร้อมการรองรับการสลับและรายการที่อนุญาต",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "หน้าที่ถูกจำกัด"
-    },
-    "whitelistedNotice": {
-        "message": "อยู่ในข้อยกเว้น"
-    },
-    "cantAddPage": {
-        "message": "หน้าเว็บไม่ถูกต้อง"
-    },
-    "exceptionsTitle": {
-        "message": "ข้อยกเว้น"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "กำลังบันทึก..."
-    },
-    "saved": {
-        "message": "บันทึกแล้ว"
-    },
-    "error": {
-        "message": "ข้อผิดพลาด"
-    }
+    "extName":  {
+                    "message":  "ซ่อนแถบเลื่อน",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "ซ่อนแถบเลื่อนบนเว็บไซต์ส่วนใหญ่โดยอัตโนมัติเพื่ออินเทอร์เฟซที่สะอาดยิ่งขึ้น พร้อมการรองรับการสลับและรายการที่อนุญาต",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "หน้าที่ถูกจำกัด"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "อยู่ในข้อยกเว้น"
+                          },
+    "cantAddPage":  {
+                        "message":  "หน้าเว็บไม่ถูกต้อง"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "ข้อยกเว้น"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "กำลังบันทึก..."
+               },
+    "saved":  {
+                  "message":  "บันทึกแล้ว"
+              },
+    "error":  {
+                  "message":  "ข้อผิดพลาด"
+              },
+    "addCurrentHost":  {
+                           "message":  "เพิ่มเว็บไซต์ไปยังรายการอนุญาต"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "ลบเว็บไซต์ออกจากรายการอนุญาต"
+                          },
+    "exportData":  {
+                       "message":  "ส่งออกข้อมูล"
+                   },
+    "importData":  {
+                       "message":  "นำเข้าข้อมูล"
+                   },
+    "openExceptions":  {
+                           "message":  "เปิดข้อยกเว้น"
+                       }
 }

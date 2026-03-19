@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "스크롤바 숨기기",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "더 깔끔한 인터페이스를 위해 대부분의 웹사이트에서 스크롤바를 자동으로 숨깁니다. 토글 및 화이트리스트를 지원합니다.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "제한된 페이지"
-    },
-    "whitelistedNotice": {
-        "message": "예외 목록"
-    },
-    "cantAddPage": {
-        "message": "잘못된 페이지"
-    },
-    "exceptionsTitle": {
-        "message": "예외 목록"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "저장 중..."
-    },
-    "saved": {
-        "message": "저장됨"
-    },
-    "error": {
-        "message": "오류"
-    }
+    "extName":  {
+                    "message":  "스크롤바 숨기기",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "더 깔끔한 인터페이스를 위해 대부분의 웹사이트에서 스크롤바를 자동으로 숨깁니다. 토글 및 화이트리스트를 지원합니다.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "제한된 페이지"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "예외 목록"
+                          },
+    "cantAddPage":  {
+                        "message":  "잘못된 페이지"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "예외 목록"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "저장 중..."
+               },
+    "saved":  {
+                  "message":  "저장됨"
+              },
+    "error":  {
+                  "message":  "오류"
+              },
+    "addCurrentHost":  {
+                           "message":  "사이트를 허용 목록에 추가"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "사이트를 허용 목록에서 제거"
+                          },
+    "exportData":  {
+                       "message":  "데이터 내보내기"
+                   },
+    "importData":  {
+                       "message":  "데이터 가져오기"
+                   },
+    "openExceptions":  {
+                           "message":  "예외 열기"
+                       }
 }

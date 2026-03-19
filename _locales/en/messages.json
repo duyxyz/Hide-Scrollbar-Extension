@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Hide Scrollbar",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Automatically hides the scrollbar on most websites for a cleaner interface, with toggle and whitelist support.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Restricted page"
-    },
-    "whitelistedNotice": {
-        "message": "In exception list"
-    },
-    "cantAddPage": {
-        "message": "Invalid page"
-    },
-    "exceptionsTitle": {
-        "message": "Exceptions"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Saving..."
-    },
-    "saved": {
-        "message": "Saved"
-    },
-    "error": {
-        "message": "Error"
-    }
+    "extName":  {
+                    "message":  "Hide Scrollbar",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Automatically hides the scrollbar on most websites for a cleaner interface, with toggle and whitelist support.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Restricted page"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "In exception list"
+                          },
+    "cantAddPage":  {
+                        "message":  "Invalid page"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Exceptions"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Saving..."
+               },
+    "saved":  {
+                  "message":  "Saved"
+              },
+    "error":  {
+                  "message":  "Error"
+              },
+    "addCurrentHost":  {
+                           "message":  "Add site to whitelist"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Remove site from whitelist"
+                          },
+    "exportData":  {
+                       "message":  "Export data"
+                   },
+    "importData":  {
+                       "message":  "Import data"
+                   },
+    "openExceptions":  {
+                           "message":  "Open exceptions"
+                       }
 }

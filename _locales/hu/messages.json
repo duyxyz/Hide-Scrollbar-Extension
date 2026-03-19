@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Görgetősáv Elrejtése",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Automatikusan elrejti a görgetősávot a legtöbb weboldalon a tisztább felület érdekében, kapcsoló és kivétellista támogatással.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Korlátozott oldal"
-    },
-    "whitelistedNotice": {
-        "message": "A kivétellistában"
-    },
-    "cantAddPage": {
-        "message": "Érvénytelen oldal"
-    },
-    "exceptionsTitle": {
-        "message": "Kivételek"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Mentés..."
-    },
-    "saved": {
-        "message": "Mentve"
-    },
-    "error": {
-        "message": "Hiba"
-    }
+    "extName":  {
+                    "message":  "Görgetősáv Elrejtése",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Automatikusan elrejti a görgetősávot a legtöbb weboldalon a tisztább felület érdekében, kapcsoló és kivétellista támogatással.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Korlátozott oldal"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "A kivétellistában"
+                          },
+    "cantAddPage":  {
+                        "message":  "Érvénytelen oldal"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Kivételek"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Mentés..."
+               },
+    "saved":  {
+                  "message":  "Mentve"
+              },
+    "error":  {
+                  "message":  "Hiba"
+              },
+    "addCurrentHost":  {
+                           "message":  "Webhely hozzáadása a kivételekhez"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Webhely eltávolítása a kivételek közül"
+                          },
+    "exportData":  {
+                       "message":  "Adatok exportálása"
+                   },
+    "importData":  {
+                       "message":  "Adatok importálása"
+                   },
+    "openExceptions":  {
+                           "message":  "Kivételek megnyitása"
+                       }
 }

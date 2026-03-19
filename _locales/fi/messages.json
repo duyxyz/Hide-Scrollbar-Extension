@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Piilota Vierityspalkki",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Piilottaa automaattisesti vierityspalkin useimmilla verkkosivustoilla puhtaamman käyttöliittymän saamiseksi, tuella vaihtamiselle ja poikkeusluettelolle.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Rajoitettu sivu"
-    },
-    "whitelistedNotice": {
-        "message": "Poikkeusluettelossa"
-    },
-    "cantAddPage": {
-        "message": "Virheellinen sivu"
-    },
-    "exceptionsTitle": {
-        "message": "Poikkeukset"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Tallennetaan..."
-    },
-    "saved": {
-        "message": "Tallennettu"
-    },
-    "error": {
-        "message": "Virhe"
-    }
+    "extName":  {
+                    "message":  "Piilota Vierityspalkki",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Piilottaa automaattisesti vierityspalkin useimmilla verkkosivustoilla puhtaamman käyttöliittymän saamiseksi, tuella vaihtamiselle ja poikkeusluettelolle.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Rajoitettu sivu"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Poikkeusluettelossa"
+                          },
+    "cantAddPage":  {
+                        "message":  "Virheellinen sivu"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Poikkeukset"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Tallennetaan..."
+               },
+    "saved":  {
+                  "message":  "Tallennettu"
+              },
+    "error":  {
+                  "message":  "Virhe"
+              },
+    "addCurrentHost":  {
+                           "message":  "Lisää sivusto sallittujen listalle"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Poista sivusto sallittujen listalta"
+                          },
+    "exportData":  {
+                       "message":  "Vie tiedot"
+                   },
+    "importData":  {
+                       "message":  "Tuo tiedot"
+                   },
+    "openExceptions":  {
+                           "message":  "Avaa poikkeukset"
+                       }
 }

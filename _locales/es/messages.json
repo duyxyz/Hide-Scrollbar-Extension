@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Ocultar Barra de Desplazamiento",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Oculta automáticamente la barra de desplazamiento en la mayoría de los sitios web para una interfaz más limpia.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Página restringida"
-    },
-    "whitelistedNotice": {
-        "message": "Lista de excepciones"
-    },
-    "cantAddPage": {
-        "message": "Página no válida"
-    },
-    "exceptionsTitle": {
-        "message": "Excepciones"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Guardando..."
-    },
-    "saved": {
-        "message": "Guardado"
-    },
-    "error": {
-        "message": "Error"
-    }
+    "extName":  {
+                    "message":  "Ocultar Barra de Desplazamiento",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Oculta automáticamente la barra de desplazamiento en la mayoría de los sitios web para una interfaz más limpia.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Página restringida"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Lista de excepciones"
+                          },
+    "cantAddPage":  {
+                        "message":  "Página no válida"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Excepciones"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Guardando..."
+               },
+    "saved":  {
+                  "message":  "Guardado"
+              },
+    "error":  {
+                  "message":  "Error"
+              },
+    "addCurrentHost":  {
+                           "message":  "Añadir sitio a la lista blanca"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Quitar sitio de la lista blanca"
+                          },
+    "exportData":  {
+                       "message":  "Exportar datos"
+                   },
+    "importData":  {
+                       "message":  "Importar datos"
+                   },
+    "openExceptions":  {
+                           "message":  "Abrir excepciones"
+                       }
 }

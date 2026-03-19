@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "隐藏滚动条",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "自动隐藏大多数网站上的滚动条，提供更干净的界面。支持切换和白名单。",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "受限页面"
-    },
-    "whitelistedNotice": {
-        "message": "例外列表"
-    },
-    "cantAddPage": {
-        "message": "页面无效"
-    },
-    "exceptionsTitle": {
-        "message": "例外列表"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "正在保存..."
-    },
-    "saved": {
-        "message": "已保存"
-    },
-    "error": {
-        "message": "错误"
-    }
+    "extName":  {
+                    "message":  "隐藏滚动条",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "自动隐藏大多数网站上的滚动条，提供更干净的界面。支持切换和白名单。",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "受限页面"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "例外列表"
+                          },
+    "cantAddPage":  {
+                        "message":  "页面无效"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "例外列表"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "正在保存..."
+               },
+    "saved":  {
+                  "message":  "已保存"
+              },
+    "error":  {
+                  "message":  "错误"
+              },
+    "addCurrentHost":  {
+                           "message":  "将网站加入白名单"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "将网站移出白名单"
+                          },
+    "exportData":  {
+                       "message":  "导出数据"
+                   },
+    "importData":  {
+                       "message":  "导入数据"
+                   },
+    "openExceptions":  {
+                           "message":  "打开例外"
+                       }
 }

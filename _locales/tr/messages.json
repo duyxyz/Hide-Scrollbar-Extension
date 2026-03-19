@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Kaydırma Çubuğunu Gizle",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Daha temiz bir arayüz için çoğu web sitesinde kaydırma çubuğunu otomatik olarak gizler, geçiş ve beyaz liste desteği ile.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Kısıtlanmış sayfa"
-    },
-    "whitelistedNotice": {
-        "message": "İstisna listesinde"
-    },
-    "cantAddPage": {
-        "message": "Geçersiz sayfa"
-    },
-    "exceptionsTitle": {
-        "message": "İstisnalar"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Kaydediliyor..."
-    },
-    "saved": {
-        "message": "Kaydedildi"
-    },
-    "error": {
-        "message": "Hata"
-    }
+    "extName":  {
+                    "message":  "Kaydırma Çubuğunu Gizle",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Daha temiz bir arayüz için çoğu web sitesinde kaydırma çubuğunu otomatik olarak gizler, geçiş ve beyaz liste desteği ile.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Kısıtlanmış sayfa"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "İstisna listesinde"
+                          },
+    "cantAddPage":  {
+                        "message":  "Geçersiz sayfa"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "İstisnalar"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Kaydediliyor..."
+               },
+    "saved":  {
+                  "message":  "Kaydedildi"
+              },
+    "error":  {
+                  "message":  "Hata"
+              },
+    "addCurrentHost":  {
+                           "message":  "Siteyi beyaz listeye ekle"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Siteyi beyaz listeden kaldır"
+                          },
+    "exportData":  {
+                       "message":  "Verileri dışa aktar"
+                   },
+    "importData":  {
+                       "message":  "Verileri içe aktar"
+                   },
+    "openExceptions":  {
+                           "message":  "İstisnaları aç"
+                       }
 }

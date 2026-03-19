@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "លាក់របាររមូរ",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "លាក់របាររមូរដោយស្វ័យប្រវត្តិនៅលើគេហទំព័រភាគច្រើនសម្រាប់ចំណុចប្រទាក់ដែលស្អាតជាងមុន។",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "ទំព័រមានកម្រិត"
-    },
-    "whitelistedNotice": {
-        "message": "បញ្ជីលើកលែង"
-    },
-    "cantAddPage": {
-        "message": "ទំព័រមិនត្រឹមត្រូវ"
-    },
-    "exceptionsTitle": {
-        "message": "ការលើកលែង"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "កំពុងរក្សាទុក..."
-    },
-    "saved": {
-        "message": "បានរក្សាទុក"
-    },
-    "error": {
-        "message": "កំហុស"
-    }
+    "extName":  {
+                    "message":  "លាក់របាររមូរ",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "លាក់របាររមូរដោយស្វ័យប្រវត្តិនៅលើគេហទំព័រភាគច្រើនសម្រាប់ចំណុចប្រទាក់ដែលស្អាតជាងមុន។",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "ទំព័រមានកម្រិត"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "បញ្ជីលើកលែង"
+                          },
+    "cantAddPage":  {
+                        "message":  "ទំព័រមិនត្រឹមត្រូវ"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "ការលើកលែង"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "កំពុងរក្សាទុក..."
+               },
+    "saved":  {
+                  "message":  "បានរក្សាទុក"
+              },
+    "error":  {
+                  "message":  "កំហុស"
+              },
+    "addCurrentHost":  {
+                           "message":  "បន្ថែមគេហទំព័រទៅបញ្ជីស"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "ដកគេហទំព័រចេញពីបញ្ជីស"
+                          },
+    "exportData":  {
+                       "message":  "នាំចេញទិន្នន័យ"
+                   },
+    "importData":  {
+                       "message":  "នាំចូលទិន្នន័យ"
+                   },
+    "openExceptions":  {
+                           "message":  "បើកករណីលើកលែង"
+                       }
 }

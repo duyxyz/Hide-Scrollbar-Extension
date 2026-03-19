@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Bildlaufleiste ausblenden",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Blendet die Bildlaufleiste auf den meisten Websites für eine sauberere Benutzeroberfläche automatisch aus.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Eingeschränkt"
-    },
-    "whitelistedNotice": {
-        "message": "Ausnahmeliste"
-    },
-    "cantAddPage": {
-        "message": "Ungültige Seite"
-    },
-    "exceptionsTitle": {
-        "message": "Ausnahmen"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Speichern..."
-    },
-    "saved": {
-        "message": "Gespeichert"
-    },
-    "error": {
-        "message": "Fehler"
-    }
+    "extName":  {
+                    "message":  "Bildlaufleiste ausblenden",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Blendet die Bildlaufleiste auf den meisten Websites für eine sauberere Benutzeroberfläche automatisch aus.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Eingeschränkt"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Ausnahmeliste"
+                          },
+    "cantAddPage":  {
+                        "message":  "Ungültige Seite"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Ausnahmen"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Speichern..."
+               },
+    "saved":  {
+                  "message":  "Gespeichert"
+              },
+    "error":  {
+                  "message":  "Fehler"
+              },
+    "addCurrentHost":  {
+                           "message":  "Website zur Ausnahmeliste hinzufügen"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Website aus der Ausnahmeliste entfernen"
+                          },
+    "exportData":  {
+                       "message":  "Daten exportieren"
+                   },
+    "importData":  {
+                       "message":  "Daten importieren"
+                   },
+    "openExceptions":  {
+                           "message":  "Ausnahmen öffnen"
+                       }
 }

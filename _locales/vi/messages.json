@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Ẩn Thanh Cuộn",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Tự động ẩn thanh cuộn trên hầu hết các trang web để có giao diện gọn gàng hơn. Bao gồm nút bật/tắt và danh sách ngoại lệ.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Trang bị giới hạn"
-    },
-    "whitelistedNotice": {
-        "message": "Trang trong ngoại lệ"
-    },
-    "cantAddPage": {
-        "message": "Trang không hợp lệ"
-    },
-    "exceptionsTitle": {
-        "message": "Danh sách ngoại lệ"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Đang lưu..."
-    },
-    "saved": {
-        "message": "Đã lưu"
-    },
-    "error": {
-        "message": "Lỗi"
-    }
+    "extName":  {
+                    "message":  "Ẩn Thanh Cuộn",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Tự động ẩn thanh cuộn trên hầu hết các trang web để có giao diện gọn gàng hơn. Bao gồm nút bật/tắt và danh sách ngoại lệ.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Trang bị giới hạn"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Trang trong ngoại lệ"
+                          },
+    "cantAddPage":  {
+                        "message":  "Trang không hợp lệ"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Danh sách ngoại lệ"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Đang lưu..."
+               },
+    "saved":  {
+                  "message":  "Đã lưu"
+              },
+    "error":  {
+                  "message":  "Lỗi"
+              },
+    "addCurrentHost":  {
+                           "message":  "Thêm trang vào danh sách trắng"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Xóa trang khỏi danh sách trắng"
+                          },
+    "exportData":  {
+                       "message":  "Xuất dữ liệu"
+                   },
+    "importData":  {
+                       "message":  "Nhập dữ liệu"
+                   },
+    "openExceptions":  {
+                           "message":  "Mở ngoại lệ"
+                       }
 }

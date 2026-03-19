@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Скрыть полосу прокрутки",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Автоматически скрывает полосу прокрутки на большинстве веб-сайтов для более чистого интерфейса.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Ограничено"
-    },
-    "whitelistedNotice": {
-        "message": "В исключениях"
-    },
-    "cantAddPage": {
-        "message": "Ошибка страницы"
-    },
-    "exceptionsTitle": {
-        "message": "Исключения"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Сохранение..."
-    },
-    "saved": {
-        "message": "Сохранено"
-    },
-    "error": {
-        "message": "Ошибка"
-    }
+    "extName":  {
+                    "message":  "Скрыть полосу прокрутки",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Автоматически скрывает полосу прокрутки на большинстве веб-сайтов для более чистого интерфейса.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Ограничено"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "В исключениях"
+                          },
+    "cantAddPage":  {
+                        "message":  "Ошибка страницы"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Исключения"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Сохранение..."
+               },
+    "saved":  {
+                  "message":  "Сохранено"
+              },
+    "error":  {
+                  "message":  "Ошибка"
+              },
+    "addCurrentHost":  {
+                           "message":  "Добавить сайт в белый список"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Удалить сайт из белого списка"
+                          },
+    "exportData":  {
+                       "message":  "Экспортировать данные"
+                   },
+    "importData":  {
+                       "message":  "Импортировать данные"
+                   },
+    "openExceptions":  {
+                           "message":  "Открыть исключения"
+                       }
 }

@@ -28,12 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const updateAddButtonState = (inList) => {
+    const labelKey = inList ? 'removeCurrentHost' : 'addCurrentHost';
+    const label = chrome.i18n.getMessage(labelKey) || (inList ? 'Remove site from whitelist' : 'Add site to whitelist');
     addCurrentVertical.style.display = inList ? 'none' : 'block';
-    addCurrentBtn.setAttribute(
-      'aria-label',
-      inList ? 'Remove site from whitelist' : 'Add site to whitelist'
-    );
-    addCurrentBtn.title = inList ? 'Remove site from whitelist' : 'Add site to whitelist';
+    addCurrentBtn.setAttribute('aria-label', label);
+    addCurrentBtn.title = label;
   };
 
   const updateNotice = (whitelist) => {

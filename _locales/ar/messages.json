@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "إخفاء شريط التمرير",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "إخفاء شريط التمرير تلقائيًا في معظم مواقع الويب للحصول على واجهة أنظف.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "صفحة مقيدة"
-    },
-    "whitelistedNotice": {
-        "message": "قائمة الاستثناءات"
-    },
-    "cantAddPage": {
-        "message": "صفحة غير صالحة"
-    },
-    "exceptionsTitle": {
-        "message": "الاستثناءات"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "جاري الحفظ..."
-    },
-    "saved": {
-        "message": "تم الحفظ"
-    },
-    "error": {
-        "message": "خطأ"
-    }
+    "extName":  {
+                    "message":  "إخفاء شريط التمرير",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "إخفاء شريط التمرير تلقائيًا في معظم مواقع الويب للحصول على واجهة أنظف.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "صفحة مقيدة"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "قائمة الاستثناءات"
+                          },
+    "cantAddPage":  {
+                        "message":  "صفحة غير صالحة"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "الاستثناءات"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "جاري الحفظ..."
+               },
+    "saved":  {
+                  "message":  "تم الحفظ"
+              },
+    "error":  {
+                  "message":  "خطأ"
+              },
+    "addCurrentHost":  {
+                           "message":  "إضافة الموقع إلى القائمة البيضاء"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "إزالة الموقع من القائمة البيضاء"
+                          },
+    "exportData":  {
+                       "message":  "تصدير البيانات"
+                   },
+    "importData":  {
+                       "message":  "استيراد البيانات"
+                   },
+    "openExceptions":  {
+                           "message":  "فتح الاستثناءات"
+                       }
 }

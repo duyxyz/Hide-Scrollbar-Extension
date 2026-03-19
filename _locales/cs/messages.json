@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Skrýt Posuvník",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Automaticky skryje posuvník na většině webových stránek pro čistší rozhraní s podporou přepínání a seznamu výjimek.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Omezená stránka"
-    },
-    "whitelistedNotice": {
-        "message": "V seznamu výjimek"
-    },
-    "cantAddPage": {
-        "message": "Neplatná stránka"
-    },
-    "exceptionsTitle": {
-        "message": "Výjimky"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Ukládání..."
-    },
-    "saved": {
-        "message": "Uloženo"
-    },
-    "error": {
-        "message": "Chyba"
-    }
+    "extName":  {
+                    "message":  "Skrýt Posuvník",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Automaticky skryje posuvník na většině webových stránek pro čistší rozhraní s podporou přepínání a seznamu výjimek.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Omezená stránka"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "V seznamu výjimek"
+                          },
+    "cantAddPage":  {
+                        "message":  "Neplatná stránka"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Výjimky"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Ukládání..."
+               },
+    "saved":  {
+                  "message":  "Uloženo"
+              },
+    "error":  {
+                  "message":  "Chyba"
+              },
+    "addCurrentHost":  {
+                           "message":  "Přidat web na seznam výjimek"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Odebrat web ze seznamu výjimek"
+                          },
+    "exportData":  {
+                       "message":  "Exportovat data"
+                   },
+    "importData":  {
+                       "message":  "Importovat data"
+                   },
+    "openExceptions":  {
+                           "message":  "Otevřít výjimky"
+                       }
 }

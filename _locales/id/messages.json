@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Sembunyikan Bilah Gulir",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Secara otomatis menyembunyikan bilah gulir di sebagian besar situs web untuk antarmuka yang lebih bersih, dengan dukungan sakelar dan daftar putih.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Halaman dibatasi"
-    },
-    "whitelistedNotice": {
-        "message": "Dalam daftar pengecualian"
-    },
-    "cantAddPage": {
-        "message": "Halaman tidak valid"
-    },
-    "exceptionsTitle": {
-        "message": "Pengecualian"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Menyimpan..."
-    },
-    "saved": {
-        "message": "Disimpan"
-    },
-    "error": {
-        "message": "Kesalahan"
-    }
+    "extName":  {
+                    "message":  "Sembunyikan Bilah Gulir",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Secara otomatis menyembunyikan bilah gulir di sebagian besar situs web untuk antarmuka yang lebih bersih, dengan dukungan sakelar dan daftar putih.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Halaman dibatasi"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Dalam daftar pengecualian"
+                          },
+    "cantAddPage":  {
+                        "message":  "Halaman tidak valid"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Pengecualian"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Menyimpan..."
+               },
+    "saved":  {
+                  "message":  "Disimpan"
+              },
+    "error":  {
+                  "message":  "Kesalahan"
+              },
+    "addCurrentHost":  {
+                           "message":  "Tambahkan situs ke daftar putih"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Hapus situs dari daftar putih"
+                          },
+    "exportData":  {
+                       "message":  "Ekspor data"
+                   },
+    "importData":  {
+                       "message":  "Impor data"
+                   },
+    "openExceptions":  {
+                           "message":  "Buka pengecualian"
+                       }
 }

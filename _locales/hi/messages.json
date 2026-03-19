@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "स्क्रॉलबार छिपाएं",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "क्लीनर इंटरफ़ेस के लिए अधिकांश वेबसाइटों पर स्वचालित रूप से स्क्रॉलबार छुपाता है।",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "प्रतिबंधित पृष्ठ"
-    },
-    "whitelistedNotice": {
-        "message": "अपवाद सूची"
-    },
-    "cantAddPage": {
-        "message": "अमान्य पृष्ठ"
-    },
-    "exceptionsTitle": {
-        "message": "अपवाद"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "सहेजा जा रहा है..."
-    },
-    "saved": {
-        "message": "सहेजा गया"
-    },
-    "error": {
-        "message": "त्रुटि"
-    }
+    "extName":  {
+                    "message":  "स्क्रॉलबार छिपाएं",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "क्लीनर इंटरफ़ेस के लिए अधिकांश वेबसाइटों पर स्वचालित रूप से स्क्रॉलबार छुपाता है।",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "प्रतिबंधित पृष्ठ"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "अपवाद सूची"
+                          },
+    "cantAddPage":  {
+                        "message":  "अमान्य पृष्ठ"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "अपवाद"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "सहेजा जा रहा है..."
+               },
+    "saved":  {
+                  "message":  "सहेजा गया"
+              },
+    "error":  {
+                  "message":  "त्रुटि"
+              },
+    "addCurrentHost":  {
+                           "message":  "साइट को श्वेतसूची में जोड़ें"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "साइट को श्वेतसूची से हटाएँ"
+                          },
+    "exportData":  {
+                       "message":  "डेटा निर्यात करें"
+                   },
+    "importData":  {
+                       "message":  "डेटा आयात करें"
+                   },
+    "openExceptions":  {
+                           "message":  "अपवाद खोलें"
+                       }
 }

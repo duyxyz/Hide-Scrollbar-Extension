@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "Masquer la Barre de Défilement",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "Masque automatiquement la barre de défilement sur la plupart des sites Web pour une interface plus épurée.",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "Page restreinte"
-    },
-    "whitelistedNotice": {
-        "message": "Liste d'exceptions"
-    },
-    "cantAddPage": {
-        "message": "Page invalide"
-    },
-    "exceptionsTitle": {
-        "message": "Exceptions"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "Enregistrement..."
-    },
-    "saved": {
-        "message": "Enregistré"
-    },
-    "error": {
-        "message": "Erreur"
-    }
+    "extName":  {
+                    "message":  "Masquer la Barre de Défilement",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "Masque automatiquement la barre de défilement sur la plupart des sites Web pour une interface plus épurée.",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "Page restreinte"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "Liste d\u0027exceptions"
+                          },
+    "cantAddPage":  {
+                        "message":  "Page invalide"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "Exceptions"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "Enregistrement..."
+               },
+    "saved":  {
+                  "message":  "Enregistré"
+              },
+    "error":  {
+                  "message":  "Erreur"
+              },
+    "addCurrentHost":  {
+                           "message":  "Ajouter le site à la liste blanche"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "Retirer le site de la liste blanche"
+                          },
+    "exportData":  {
+                       "message":  "Exporter les données"
+                   },
+    "importData":  {
+                       "message":  "Importer les données"
+                   },
+    "openExceptions":  {
+                           "message":  "Ouvrir les exceptions"
+                       }
 }

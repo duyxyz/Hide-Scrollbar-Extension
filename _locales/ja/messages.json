@@ -1,34 +1,49 @@
 {
-    "extName": {
-        "message": "スクロールバーを隠す",
-        "description": "Name of the extension"
-    },
-    "extDesc": {
-        "message": "よりクリーンなインターフェイスのために、ほとんどのウェブサイトのスクロールバーを自動的に非表示にします。",
-        "description": "Description of the extension"
-    },
-    "restrictedNotice": {
-        "message": "制限されたページ"
-    },
-    "whitelistedNotice": {
-        "message": "例外リスト"
-    },
-    "cantAddPage": {
-        "message": "無効なページ"
-    },
-    "exceptionsTitle": {
-        "message": "例外リスト"
-    },
-    "domainPlaceholder": {
-        "message": "https://www.example.com/"
-    },
-    "saving": {
-        "message": "保存中..."
-    },
-    "saved": {
-        "message": "保存済み"
-    },
-    "error": {
-        "message": "エラー"
-    }
+    "extName":  {
+                    "message":  "スクロールバーを隠す",
+                    "description":  "Name of the extension"
+                },
+    "extDesc":  {
+                    "message":  "よりクリーンなインターフェイスのために、ほとんどのウェブサイトのスクロールバーを自動的に非表示にします。",
+                    "description":  "Description of the extension"
+                },
+    "restrictedNotice":  {
+                             "message":  "制限されたページ"
+                         },
+    "whitelistedNotice":  {
+                              "message":  "例外リスト"
+                          },
+    "cantAddPage":  {
+                        "message":  "無効なページ"
+                    },
+    "exceptionsTitle":  {
+                            "message":  "例外リスト"
+                        },
+    "domainPlaceholder":  {
+                              "message":  "https://www.example.com/"
+                          },
+    "saving":  {
+                   "message":  "保存中..."
+               },
+    "saved":  {
+                  "message":  "保存済み"
+              },
+    "error":  {
+                  "message":  "エラー"
+              },
+    "addCurrentHost":  {
+                           "message":  "サイトをホワイトリストに追加"
+                       },
+    "removeCurrentHost":  {
+                              "message":  "サイトをホワイトリストから削除"
+                          },
+    "exportData":  {
+                       "message":  "データをエクスポート"
+                   },
+    "importData":  {
+                       "message":  "データをインポート"
+                   },
+    "openExceptions":  {
+                           "message":  "例外を開く"
+                       }
 }
