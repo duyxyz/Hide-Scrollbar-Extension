@@ -5,7 +5,7 @@
     String(raw)
       .trim()
       .toLowerCase()
-      .replace(/^(https?:\/\/)?(www\.)?/, '')
+      .replace(/^(https?:\/\/)?/, '')
       .replace(/\/.*$/, '');
 
   const normalizeWhitelist = (domains) =>
@@ -20,8 +20,7 @@
   const isWhitelisted = (hostname, whitelist) => {
     if (!hostname) return false;
     const whitelistSet = new Set(whitelist);
-    if (whitelistSet.has(hostname)) return true;
-    return whitelist.some((domain) => hostname.endsWith(`.${domain}`));
+    return whitelistSet.has(hostname);
   };
 
   const isRestrictedUrl = (url) => {
