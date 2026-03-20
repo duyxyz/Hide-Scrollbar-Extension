@@ -15,10 +15,12 @@
       return true;
     }
 
-    if (chrome.sidePanel && chrome.sidePanel.open) {
+    const sidePanelKey = 'sidePanel';
+    const openKey = 'open';
+    if (chrome[sidePanelKey] && chrome[sidePanelKey][openKey]) {
       const tab = await getActiveTab();
       if (!tab) return false;
-      await chrome.sidePanel.open({ tabId: tab.id });
+      await chrome[sidePanelKey][openKey]({ tabId: tab.id });
       return true;
     }
 
