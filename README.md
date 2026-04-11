@@ -1,7 +1,7 @@
 # Hide Scrollbar Extension
 
 | Icon | Store |
-| :---: | :--- |
+| :---: | :---: |
 | <img src="assets/icons/icon128.png" width="48" height="48"> | [**Add**](https://chromewebstore.google.com/detail/gngenlhkmpneoiicndbjghjhpogdcncl?utm_source=item-share-cb) |
 
 
