@@ -19,30 +19,17 @@ jobs:
       - name: Update manifest versions
         id: version
         run: |
-          BASE_VERSION=$(jq -r '.version' platform/chromium/manifest.json)
+          BASE_VERSION=$(jq -r '.version' manifest.json)
           NEW_VERSION="${BASE_VERSION}.${{ github.run_number }}"
           echo "Updating version from $BASE_VERSION to $NEW_VERSION"
 
-          jq ".version = \"$NEW_VERSION\"" platform/chromium/manifest.json > tmp.json && mv tmp.json platform/chromium/manifest.json
-          jq ".version = \"$NEW_VERSION\"" platform/firefox/manifest.json > tmp.json && mv tmp.json platform/firefox/manifest.json
+          jq ".version = \"$NEW_VERSION\"" manifest.json > tmp.json && mv tmp.json manifest.json
 
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Create Zip Archives
         run: |
-          cp platform/chromium/manifest.json manifest.json
-          cp src/shared/browser-api.chrome.js src/shared/browser-api.js
-          zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "tmp.json" "scripts/*" "platform/*" "*.zip" "src/shared/browser-api.chrome.js" "src/shared/browser-api.firefox.js" "test-builds/*"
-
-          rm manifest.json
-          rm src/shared/browser-api.js
-
-          cp platform/firefox/manifest.json manifest.json
-          cp src/shared/browser-api.firefox.js src/shared/browser-api.js
-          zip -r extension-firefox-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "tmp.json" "scripts/*" "platform/*" "*.zip" "src/shared/browser-api.chrome.js" "src/shared/browser-api.firefox.js" "test-builds/*"
-
-          rm manifest.json
-          rm src/shared/browser-api.js
+          zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.hintrc" "README.md" "tmp.json" "*.zip"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -51,7 +38,6 @@ jobs:
           name: Release v${{ env.VERSION }}
           files: |
             extension-chrome-v${{ env.VERSION }}.zip
-            extension-firefox-v${{ env.VERSION }}.zip
           draft: false
           prerelease: false
         env:
