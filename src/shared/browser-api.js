@@ -5,17 +5,10 @@
   };
 
   const openPanelForCurrentTab = async () => {
-    if (chrome.sidebarAction && chrome.sidebarAction.open) {
-      await chrome.sidebarAction.open();
-      return true;
-    }
-
-    const sidePanelKey = 'sidePanel';
-    const openKey = 'open';
-    if (chrome[sidePanelKey] && chrome[sidePanelKey][openKey]) {
+    if (chrome.sidePanel && chrome.sidePanel.open) {
       const tab = await getActiveTab();
       if (!tab) return false;
-      await chrome[sidePanelKey][openKey]({ tabId: tab.id });
+      await chrome.sidePanel.open({ tabId: tab.id });
       return true;
     }
 

@@ -44,13 +44,21 @@ const updateBadgeForTab = async (tabId) => {
   await updateBadge(tabId, scrollbarHidden, whitelist);
 };
 
-const updateAllTabs = async () => {
+const updateAllBadges = async () => {
+  const { scrollbarHidden, whitelist } = await getSyncState();
+
+  chrome.tabs.query({}, (tabs) => {
+    tabs.forEach((tab) => updateBadge(tab.id, scrollbarHidden, whitelist));
+  });
+};
+
+const injectAllTabs = async () => {
   const { scrollbarHidden, whitelist } = await getSyncState();
 
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
       updateBadge(tab.id, scrollbarHidden, whitelist);
-      
+
       if (tab.url && !isRestrictedUrl(tab.url) && chrome.scripting) {
         chrome.scripting.executeScript({
           target: { tabId: tab.id },
@@ -75,12 +83,12 @@ chrome.tabs.onUpdated.addListener((tabId, info) => {
 });
 
 chrome.storage.onChanged.addListener((_, namespace) => {
-  if (namespace === 'sync') updateAllTabs();
+  if (namespace === 'sync') updateAllBadges();
 });
 
-chrome.runtime.onStartup.addListener(updateAllTabs);
-chrome.runtime.onInstalled.addListener(updateAllTabs);
+chrome.runtime.onStartup.addListener(injectAllTabs);
+chrome.runtime.onInstalled.addListener(injectAllTabs);
 
-updateAllTabs().catch((err) => {
-  console.error('[Background] Startup updateAllTabs execution failed', { error: err });
+injectAllTabs().catch((err) => {
+  console.error('[Background] Startup injectAllTabs failed', { error: err });
 });

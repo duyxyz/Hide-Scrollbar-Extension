@@ -1,5 +1,5 @@
 (() => {
-  const { DEFAULT_SYNC_STATE, STORAGE_KEYS } = globalThis.ScrollHideConstants;
+  const { DEFAULT_SYNC_STATE } = globalThis.ScrollHideConstants;
 
   const toPromise = (executor) =>
     new Promise((resolve, reject) => {
