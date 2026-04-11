@@ -1,46 +1,25 @@
 # Hide Scrollbar Extension
 
-Browser extension to hide scrollbars on websites while keeping page scrolling usable.
+| Icon | Official Store |
+| :---: | :--- |
+| <img src="assets/icons/icon128.png" width="48" height="48"> | [**Add to Chrome**](https://chromewebstore.google.com/detail/gngenlhkmpneoiicndbjghjhpogdcncl?utm_source=item-share-cb) |
 
-It supports:
-- Chromium-based browsers
-- Per-site whitelist
-- Popup toggle
-- Side panel for editing exceptions
-- Import/export of saved settings
 
-## Project Structure
+A browser extension to hide scrollbars for a cleaner interface, while keeping scrolling functionality intact.
 
-```text
-manifest.json
+## Features
+- **Universal Hiding**: Works on most websites.
+- **Toggle Support**: Easily turn the effect on/off via the popup.
+- **Whitelist**: Exclude specific sites from being modified.
+- **Side Panel**: Dedicated UI to manage exceptions.
+- **Offline Sync**: Settings are synced across browser instances.
 
-src/
-  entries/
-    background.js
-    content.js
-  features/
-    popup/
-    sidepanel/
-    whitelist/
-  shared/
+## Development
+This extension runs directly from the project root.
 
-assets/
-  icons/
-  styles/
+1. Go to `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked** and select this directory.
 
-_locales/
-```
-
-## Development Workflow
-
-The extension runs directly out of the project root!
-
-1. Open the project root folder.
-2. Edit your source files in `src/`, `assets/`, or `_locales/`.
-3. In Chrome/Edge, go to Extensions and click **Load unpacked**.
-4. Select the `Hide.Scrollbar.Extension` root folder.
-5. You're done! Reload the extension to see your changes.
-
-## Packaging
-
-The GitHub workflow handles building the release `.zip` automatically whenever you push to main/master. It zips the root directory and securely packages the extension.
+## Build
+The GitHub Action automatically packages the extension into a `.zip` file on every push to `main`/`master`, excluding non-essential files (`demo/`, `test/`, etc.).
