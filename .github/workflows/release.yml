@@ -38,7 +38,7 @@ jobs:
 
       - name: Create Zip Archives
         run: |
-          zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.agents*" "skills-lock.json" "README.md" "tmp.json" "*.zip"
+          zip -r extension-chrome-v${{ env.VERSION }}.zip . -x "*.git*" "*.github*" "*.vscode*" "*.agents*" "skills-lock.json" "README.md" "tmp.json" "*.zip" "demo/*" "test/*" "chrome_store_fix_plan.md"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
