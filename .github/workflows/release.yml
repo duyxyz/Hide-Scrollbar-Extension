@@ -20,7 +20,16 @@ jobs:
         id: version
         run: |
           BASE_VERSION=$(jq -r '.version' manifest.json)
-          NEW_VERSION="${BASE_VERSION}.${{ github.run_number }}"
+          RUN_NUMBER=${{ github.run_number }}
+          MAJOR=$(echo $BASE_VERSION | cut -d. -f1)
+          MINOR_BASE=$(echo $BASE_VERSION | cut -d. -f2)
+          MINOR_BASE=${MINOR_BASE:-0}
+          
+          PATCH=$((RUN_NUMBER % 10))
+          INCREMENT=$((RUN_NUMBER / 10))
+          NEW_MINOR=$((MINOR_BASE + INCREMENT))
+          
+          NEW_VERSION="${MAJOR}.${NEW_MINOR}.${PATCH}"
           echo "Updating version from $BASE_VERSION to $NEW_VERSION"
 
           jq ".version = \"$NEW_VERSION\"" manifest.json > tmp.json && mv tmp.json manifest.json
