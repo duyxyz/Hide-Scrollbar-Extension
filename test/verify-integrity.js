@@ -19,18 +19,38 @@ assert(fs.existsSync(manifestPath), 'manifest.json exists');
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 assert(manifest.manifest_version === 3, 'Manifest version is 3');
 assert(manifest.options_ui && manifest.options_ui.page, 'options_ui is configured in manifest');
-assert(fs.existsSync(path.resolve(__dirname, '..', manifest.options_ui.page)), `options_ui page exists: ${manifest.options_ui.page}`);
+const optionsPage = manifest.options_ui.page;
+assert(
+  fs.existsSync(path.resolve(__dirname, '..', optionsPage)) ||
+  fs.existsSync(path.resolve(__dirname, '../src', optionsPage)) ||
+  fs.existsSync(path.resolve(__dirname, '../dist', optionsPage)),
+  `options_ui page exists: ${optionsPage}`
+);
+
 assert(manifest.action && manifest.action.default_popup, 'default_popup is configured in manifest');
-assert(fs.existsSync(path.resolve(__dirname, '..', manifest.action.default_popup)), `default_popup exists: ${manifest.action.default_popup}`);
+const popupPage = manifest.action.default_popup;
+assert(
+  fs.existsSync(path.resolve(__dirname, '..', popupPage)) ||
+  fs.existsSync(path.resolve(__dirname, '../src', popupPage)) ||
+  fs.existsSync(path.resolve(__dirname, '../dist', popupPage)),
+  `default_popup exists: ${popupPage}`
+);
 if (manifest.icons) {
   Object.entries(manifest.icons).forEach(([size, iconPath]) => {
-    assert(fs.existsSync(path.resolve(__dirname, '..', iconPath)), `Manifest icon ${size}px exists: ${iconPath}`);
+    assert(
+      fs.existsSync(path.resolve(__dirname, '..', iconPath)) ||
+      fs.existsSync(path.resolve(__dirname, '../src', iconPath)) ||
+      fs.existsSync(path.resolve(__dirname, '../dist', iconPath)),
+      `Manifest icon ${size}px exists: ${iconPath}`
+    );
   });
 }
 
 // 2. Verify Locales
 console.log('\n--- 2. Testing Locales (_locales) ---');
-const localesRoot = path.resolve(__dirname, '../_locales');
+const localesRoot = fs.existsSync(path.resolve(__dirname, '../src/_locales'))
+  ? path.resolve(__dirname, '../src/_locales')
+  : path.resolve(__dirname, '../_locales');
 const en = JSON.parse(fs.readFileSync(path.join(localesRoot, 'en/messages.json'), 'utf8'));
 const enKeys = Object.keys(en);
 
@@ -78,29 +98,18 @@ function scanKeysInDir(dir) {
   }
 }
 scanKeysInDir(path.resolve(__dirname, '../src'));
-['options.html', 'popup.html'].forEach((file) => {
-  const filePath = path.resolve(__dirname, '..', file);
-  if (fs.existsSync(filePath)) {
-    const htmlContent = fs.readFileSync(filePath, 'utf8');
-    const htmlMatches = htmlContent.matchAll(/data-i18n(?:-[a-z]+)?=["']([^"']+)["']/g);
-    for (const m of htmlMatches) {
-      assert(enKeySet.has(m[1]), `HTML key [${m[1]}] in ${file} exists in messages.json`);
-    }
-  }
-});
-
 // 3. Verify HTML and Referenced Assets (check against dist/ for script files)
 console.log('\n--- 3. Testing HTML references and files ---');
 
-function checkHtmlFile(relPath) {
+function checkHtmlFile(srcRelPath, distRelPath) {
   // HTML source file must exist
-  const srcFullPath = path.resolve(srcRoot, relPath);
-  assert(fs.existsSync(srcFullPath), `HTML file exists: ${relPath}`);
+  const srcFullPath = path.resolve(srcRoot, srcRelPath);
+  assert(fs.existsSync(srcFullPath), `HTML file exists: ${srcRelPath}`);
   const content = fs.readFileSync(srcFullPath, 'utf8');
   
   // HTML must also exist in dist/
-  const distFullPath = path.resolve(distRoot, relPath);
-  assert(fs.existsSync(distFullPath), `HTML file in dist/: dist/${relPath}`);
+  const distFullPath = path.resolve(distRoot, distRelPath);
+  assert(fs.existsSync(distFullPath), `HTML file in dist/: dist/${distRelPath}`);
 
   const distDir = path.dirname(distFullPath);
 
@@ -109,32 +118,31 @@ function checkHtmlFile(relPath) {
   for (const m of scriptMatches) {
     if (!m[1].startsWith('http')) {
       const target = path.resolve(distDir, m[1]);
-      assert(fs.existsSync(target), `Script exists in dist/${relPath}: ${m[1]}`);
+      assert(fs.existsSync(target), `Script exists in dist/${distRelPath}: ${m[1]}`);
     }
   }
 
-  // Link stylesheet tags — resolve against src/ (CSS stays in src/)
-  const srcDir = path.dirname(srcFullPath);
+  // Link stylesheet tags — resolve against dist/
   const linkMatches = content.matchAll(/<link\s+[^>]*href=["']([^"']+)["']/g);
   for (const m of linkMatches) {
     if (!m[1].startsWith('http')) {
-      const target = path.resolve(srcDir, m[1]);
-      assert(fs.existsSync(target), `Stylesheet exists in ${relPath}: ${m[1]}`);
+      const target = path.resolve(distDir, m[1]);
+      assert(fs.existsSync(target), `Stylesheet exists in dist/${distRelPath}: ${m[1]}`);
     }
   }
 
-  // Img tags — resolve against src/
+  // Img tags — resolve against dist/
   const imgMatches = content.matchAll(/<img\s+[^>]*src=["']([^"']+)["']/g);
   for (const m of imgMatches) {
     if (m[1] && !m[1].startsWith('http') && !m[1].startsWith('data:')) {
-      const target = path.resolve(srcDir, m[1]);
-      assert(fs.existsSync(target), `Image exists in ${relPath}: ${m[1]}`);
+      const target = path.resolve(distDir, m[1]);
+      assert(fs.existsSync(target), `Image exists in dist/${distRelPath}: ${m[1]}`);
     }
   }
 }
 
-checkHtmlFile('popup.html');
-checkHtmlFile('options.html');
+checkHtmlFile('src/popup.html', 'popup.html');
+checkHtmlFile('src/options.html', 'options.html');
 
 
 // 4. Whitelist Service logic

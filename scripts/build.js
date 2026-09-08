@@ -52,17 +52,17 @@ function copyAllStatic() {
   if (fs.existsSync(path.join(rootDir, 'manifest.json'))) {
     fs.copyFileSync(path.join(rootDir, 'manifest.json'), path.join(distDir, 'manifest.json'));
   }
-  if (fs.existsSync(path.join(rootDir, 'options.html'))) {
-    fs.copyFileSync(path.join(rootDir, 'options.html'), path.join(distDir, 'options.html'));
+  if (fs.existsSync(path.join(rootDir, 'src/options.html'))) {
+    fs.copyFileSync(path.join(rootDir, 'src/options.html'), path.join(distDir, 'options.html'));
   }
-  if (fs.existsSync(path.join(rootDir, 'popup.html'))) {
-    fs.copyFileSync(path.join(rootDir, 'popup.html'), path.join(distDir, 'popup.html'));
+  if (fs.existsSync(path.join(rootDir, 'src/popup.html'))) {
+    fs.copyFileSync(path.join(rootDir, 'src/popup.html'), path.join(distDir, 'popup.html'));
   }
-  if (fs.existsSync(path.join(rootDir, '_locales'))) {
-    copyRecursive(path.join(rootDir, '_locales'), path.join(distDir, '_locales'));
+  if (fs.existsSync(path.join(rootDir, 'src/_locales'))) {
+    copyRecursive(path.join(rootDir, 'src/_locales'), path.join(distDir, '_locales'));
   }
-  if (fs.existsSync(path.join(rootDir, 'assets'))) {
-    copyRecursive(path.join(rootDir, 'assets'), path.join(distDir, 'assets'));
+  if (fs.existsSync(path.join(rootDir, 'src/assets'))) {
+    copyRecursive(path.join(rootDir, 'src/assets'), path.join(distDir, 'assets'));
   }
 
   function copySrcStatic(dir) {
@@ -225,15 +225,15 @@ async function build() {
       }, 60);
     };
 
-    // Watch src, assets, _locales, and root files
-    ['src', 'assets', '_locales'].forEach((dir) => {
+    // Watch src and manifest.json
+    ['src'].forEach((dir) => {
       const fullDir = path.join(rootDir, dir);
       if (fs.existsSync(fullDir)) {
         fs.watch(fullDir, { recursive: true }, triggerRebuild);
       }
     });
 
-    ['manifest.json', 'options.html', 'popup.html'].forEach((file) => {
+    ['manifest.json'].forEach((file) => {
       const fullPath = path.join(rootDir, file);
       if (fs.existsSync(fullPath)) {
         fs.watch(fullPath, triggerRebuild);
