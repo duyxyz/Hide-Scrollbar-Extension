@@ -64,27 +64,6 @@ function copyAllStatic() {
   if (fs.existsSync(path.join(rootDir, 'src/assets'))) {
     copyRecursive(path.join(rootDir, 'src/assets'), path.join(distDir, 'assets'));
   }
-
-  function copySrcStatic(dir) {
-    if (!fs.existsSync(dir)) return;
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
-      const relFromSrc = path.relative(path.join(rootDir, 'src'), fullPath);
-      const destPath = path.join(distDir, 'src', relFromSrc);
-
-      if (entry.isDirectory()) {
-        copySrcStatic(fullPath);
-      } else {
-        const ext = path.extname(entry.name).toLowerCase();
-        if (['.html', '.css', '.svg', '.png', '.jpg', '.jpeg', '.ico', '.json'].includes(ext)) {
-          fs.mkdirSync(path.dirname(destPath), { recursive: true });
-          fs.copyFileSync(fullPath, destPath);
-        }
-      }
-    }
-  }
-  copySrcStatic(path.join(rootDir, 'src'));
 }
 
 copyAllStatic();
