@@ -22,6 +22,11 @@ assert(manifest.options_ui && manifest.options_ui.page, 'options_ui is configure
 assert(fs.existsSync(path.resolve(__dirname, '..', manifest.options_ui.page)), `options_ui page exists: ${manifest.options_ui.page}`);
 assert(manifest.action && manifest.action.default_popup, 'default_popup is configured in manifest');
 assert(fs.existsSync(path.resolve(__dirname, '..', manifest.action.default_popup)), `default_popup exists: ${manifest.action.default_popup}`);
+if (manifest.icons) {
+  Object.entries(manifest.icons).forEach(([size, iconPath]) => {
+    assert(fs.existsSync(path.resolve(__dirname, '..', iconPath)), `Manifest icon ${size}px exists: ${iconPath}`);
+  });
+}
 
 // 2. Verify Locales
 console.log('\n--- 2. Testing Locales (_locales) ---');
