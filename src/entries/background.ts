@@ -6,7 +6,7 @@ if (typeof importScripts === 'function') {
   importScripts(
     '/src/shared/constants.js',
     '/src/shared/storage.js',
-    '/src/features/whitelist/whitelist-service.js'
+    '/src/features/whitelist.js'
   );
 }
 
@@ -89,7 +89,7 @@ const injectAllTabs = async (): Promise<void> => {
           files: [
             'src/shared/constants.js',
             'src/shared/storage.js',
-            'src/features/whitelist/whitelist-service.js',
+            'src/features/whitelist.js',
             'src/entries/content.js',
           ],
         }).catch(() => {});

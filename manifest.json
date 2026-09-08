@@ -17,13 +17,13 @@
     "<all_urls>"
   ],
   "action": {
-    "default_popup": "src/features/popup/popup.html",
+    "default_popup": "popup.html",
     "default_icon": {
       "48": "assets/icons/icon48.png"
     }
   },
   "options_ui": {
-    "page": "src/features/settings/settings.html",
+    "page": "options.html",
     "open_in_tab": true
   },
   "background": {
@@ -37,7 +37,7 @@
       "js": [
         "src/shared/constants.js",
         "src/shared/storage.js",
-        "src/features/whitelist/whitelist-service.js",
+        "src/features/whitelist.js",
         "src/entries/content.js"
       ],
       "run_at": "document_start",

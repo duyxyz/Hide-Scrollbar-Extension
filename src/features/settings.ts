@@ -50,8 +50,11 @@ const initSettings = () => {
       pane.classList.toggle('active', pane.id === `tab-${tabName}`);
     });
 
-    if (location.hash !== `#${tabName}`) {
-      history.replaceState(null, '', `#${tabName}`);
+    // Synchronize query parameter ?tab=... in URL (no hash #)
+    const currentParams = new URLSearchParams(window.location.search);
+    if (currentParams.get('tab') !== tabName) {
+      const newUrl = `${window.location.pathname}?tab=${tabName}`;
+      history.replaceState(null, '', newUrl);
     }
 
     if (tabName === 'whitelist') {
@@ -64,13 +67,16 @@ const initSettings = () => {
   });
 
   const validTabs = ['settings', 'whitelist', 'guide', 'report', 'about'];
-  const initialTab = location.hash.replace('#', '');
-  switchTab(validTabs.includes(initialTab) ? initialTab : 'settings');
+  const params = new URLSearchParams(window.location.search);
+  const initialTab = params.get('tab');
 
-  window.addEventListener('hashchange', () => {
-    const currentTab = location.hash.replace('#', '');
-    if (validTabs.includes(currentTab)) {
-      switchTab(currentTab);
+  switchTab(initialTab && validTabs.includes(initialTab) ? initialTab : 'settings');
+
+  window.addEventListener('popstate', () => {
+    const popParams = new URLSearchParams(window.location.search);
+    const popTab = popParams.get('tab') || 'settings';
+    if (validTabs.includes(popTab)) {
+      switchTab(popTab);
     }
   });
 

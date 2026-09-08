@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="options-html">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ScrollHide — Dashboard</title>
-  <link rel="stylesheet" href="../../../assets/styles/tokens.css">
-  <link rel="stylesheet" href="settings.css">
+  <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 
-<body>
+<body class="options-body">
   <!-- Top Navigation Header (uBlock Style) -->
   <header class="navbar">
     <div class="nav-brand">
-      <img src="../../../assets/icons/icon48.png" alt="ScrollHide" class="nav-logo">
+      <img src="assets/icons/icon48.png" alt="ScrollHide" class="nav-logo">
     </div>
     <nav class="nav-tabs" role="tablist">
       <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false">
@@ -428,11 +427,11 @@
     </section>
   </main>
 
-  <script src="../../shared/i18n.js"></script>
-  <script src="../../shared/constants.js"></script>
-  <script src="../../shared/storage.js"></script>
-  <script src="../whitelist/whitelist-service.js"></script>
-  <script src="settings.js"></script>
+  <script src="src/shared/i18n.js"></script>
+  <script src="src/shared/constants.js"></script>
+  <script src="src/shared/storage.js"></script>
+  <script src="src/features/whitelist.js"></script>
+  <script src="src/features/settings.js"></script>
 </body>
 
 </html>

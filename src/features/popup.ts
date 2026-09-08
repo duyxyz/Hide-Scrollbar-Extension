@@ -180,13 +180,13 @@ const initPopup = () => {
     });
   }
 
-  const openOrFocusSettingsTab = (hash: string = ''): void => {
+  const openOrFocusSettingsTab = (tabName: string = ''): void => {
     if (typeof chrome === 'undefined' || !chrome.tabs) return;
-    const settingsUrlPrefix = chrome.runtime.getURL('src/features/settings/settings.html');
-    const targetUrl = hash ? `${settingsUrlPrefix}#${hash}` : settingsUrlPrefix;
+    const settingsUrl = chrome.runtime.getURL('options.html');
+    const targetUrl = `${settingsUrl}?tab=${tabName || 'settings'}`;
 
     chrome.tabs.query({}, (tabs) => {
-      const existingTab = tabs.find((t) => t.url && t.url.startsWith(settingsUrlPrefix));
+      const existingTab = tabs.find((t) => t.url && (t.url.startsWith(settingsUrl) || t.url.includes('/options.html')));
       if (existingTab && existingTab.id) {
         chrome.tabs.update(existingTab.id, { active: true, url: targetUrl });
         if (existingTab.windowId && chrome.windows?.update) {

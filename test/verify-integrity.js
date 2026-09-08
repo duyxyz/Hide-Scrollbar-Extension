@@ -73,6 +73,16 @@ function scanKeysInDir(dir) {
   }
 }
 scanKeysInDir(path.resolve(__dirname, '../src'));
+['options.html', 'popup.html'].forEach((file) => {
+  const filePath = path.resolve(__dirname, '..', file);
+  if (fs.existsSync(filePath)) {
+    const htmlContent = fs.readFileSync(filePath, 'utf8');
+    const htmlMatches = htmlContent.matchAll(/data-i18n(?:-[a-z]+)?=["']([^"']+)["']/g);
+    for (const m of htmlMatches) {
+      assert(enKeySet.has(m[1]), `HTML key [${m[1]}] in ${file} exists in messages.json`);
+    }
+  }
+});
 
 // 3. Verify HTML and Referenced Assets (check against dist/ for script files)
 console.log('\n--- 3. Testing HTML references and files ---');
@@ -118,15 +128,15 @@ function checkHtmlFile(relPath) {
   }
 }
 
-checkHtmlFile('src/features/popup/popup.html');
-checkHtmlFile('src/features/settings/settings.html');
+checkHtmlFile('popup.html');
+checkHtmlFile('options.html');
 
 
 // 4. Whitelist Service logic
 console.log('\n--- 4. Testing Whitelist & Sanitization logic ---');
 global.globalThis = global;
 require('../dist/src/shared/constants.js');
-require('../dist/src/features/whitelist/whitelist-service.js');
+require('../dist/src/features/whitelist.js');
 const service = global.ScrollHideWhitelist;
 
 assert(service.sanitizeDomain('https://example.com/path?query=1') === 'example.com', 'Sanitize URL to domain');
@@ -162,8 +172,9 @@ assert(fs.existsSync(path.join(distPath, '_locales/en/messages.json')), 'dist/_l
 assert(fs.existsSync(path.join(distPath, '_locales/vi/messages.json')), 'dist/_locales/vi/messages.json exists');
 assert(fs.existsSync(path.join(distPath, 'src/entries/background.js')), 'dist/src/entries/background.js compiled');
 assert(fs.existsSync(path.join(distPath, 'src/entries/content.js')), 'dist/src/entries/content.js compiled');
-assert(fs.existsSync(path.join(distPath, 'src/features/popup/popup.js')), 'dist/src/features/popup/popup.js compiled');
-assert(fs.existsSync(path.join(distPath, 'src/features/settings/settings.js')), 'dist/src/features/settings/settings.js compiled');
+assert(fs.existsSync(path.join(distPath, 'src/features/popup.js')), 'dist/src/features/popup.js compiled');
+assert(fs.existsSync(path.join(distPath, 'src/features/settings.js')), 'dist/src/features/settings.js compiled');
+assert(fs.existsSync(path.join(distPath, 'src/features/whitelist.js')), 'dist/src/features/whitelist.js compiled');
 
 console.log('\n======================================================');
 if (allPassed) {

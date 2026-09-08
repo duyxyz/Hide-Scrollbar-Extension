@@ -52,6 +52,12 @@ function copyAllStatic() {
   if (fs.existsSync(path.join(rootDir, 'manifest.json'))) {
     fs.copyFileSync(path.join(rootDir, 'manifest.json'), path.join(distDir, 'manifest.json'));
   }
+  if (fs.existsSync(path.join(rootDir, 'options.html'))) {
+    fs.copyFileSync(path.join(rootDir, 'options.html'), path.join(distDir, 'options.html'));
+  }
+  if (fs.existsSync(path.join(rootDir, 'popup.html'))) {
+    fs.copyFileSync(path.join(rootDir, 'popup.html'), path.join(distDir, 'popup.html'));
+  }
   if (fs.existsSync(path.join(rootDir, '_locales'))) {
     copyRecursive(path.join(rootDir, '_locales'), path.join(distDir, '_locales'));
   }
@@ -173,13 +179,13 @@ function appendDevReloader() {
 const entryPoints = {
   'src/entries/background': path.join(rootDir, 'src/entries/background.ts'),
   'src/entries/content': path.join(rootDir, 'src/entries/content.ts'),
-  'src/features/popup/popup': path.join(rootDir, 'src/features/popup/popup.ts'),
-  'src/features/settings/settings': path.join(rootDir, 'src/features/settings/settings.ts'),
+  'src/features/popup': path.join(rootDir, 'src/features/popup.ts'),
+  'src/features/settings': path.join(rootDir, 'src/features/settings.ts'),
   'src/shared/constants': path.join(rootDir, 'src/shared/constants.ts'),
   'src/shared/storage': path.join(rootDir, 'src/shared/storage.ts'),
   'src/shared/browser-api': path.join(rootDir, 'src/shared/browser-api.ts'),
   'src/shared/i18n': path.join(rootDir, 'src/shared/i18n.ts'),
-  'src/features/whitelist/whitelist-service': path.join(rootDir, 'src/features/whitelist/whitelist-service.ts'),
+  'src/features/whitelist': path.join(rootDir, 'src/features/whitelist.ts'),
 };
 
 const buildOptions = {
@@ -227,9 +233,12 @@ async function build() {
       }
     });
 
-    if (fs.existsSync(path.join(rootDir, 'manifest.json'))) {
-      fs.watch(path.join(rootDir, 'manifest.json'), triggerRebuild);
-    }
+    ['manifest.json', 'options.html', 'popup.html'].forEach((file) => {
+      const fullPath = path.join(rootDir, file);
+      if (fs.existsSync(fullPath)) {
+        fs.watch(fullPath, triggerRebuild);
+      }
+    });
 
     console.log('⚡ Ready! Sửa bất kỳ file .ts, .css, .html nào, Chrome sẽ tự động reload ngay lập tức.');
   } else {
