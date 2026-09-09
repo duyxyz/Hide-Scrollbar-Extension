@@ -155,11 +155,10 @@ function appendDevReloader() {
 }
 
 // 5. Bundling with esbuild (IIFE format for MV3 Chrome Extension compatibility)
-const entryPoints = {
+const unbundledEntryPoints = {
   'src/entries/background': path.join(rootDir, 'src/entries/background.ts'),
   'src/entries/content': path.join(rootDir, 'src/entries/content.ts'),
   'src/features/popup': path.join(rootDir, 'src/features/popup.ts'),
-  'src/features/settings': path.join(rootDir, 'src/features/settings.ts'),
   'src/shared/constants': path.join(rootDir, 'src/shared/constants.ts'),
   'src/shared/storage': path.join(rootDir, 'src/shared/storage.ts'),
   'src/shared/browser-api': path.join(rootDir, 'src/shared/browser-api.ts'),
@@ -167,10 +166,23 @@ const entryPoints = {
   'src/features/whitelist': path.join(rootDir, 'src/features/whitelist.ts'),
 };
 
-const buildOptions = {
-  entryPoints,
+const bundledEntryPoints = {
+  'src/features/settings': path.join(rootDir, 'src/features/settings.ts'),
+};
+
+const unbundledOptions = {
+  entryPoints: unbundledEntryPoints,
   outdir: distDir,
   bundle: false,
+  format: 'iife',
+  target: 'es2022',
+  sourcemap: false,
+};
+
+const bundledOptions = {
+  entryPoints: bundledEntryPoints,
+  outdir: distDir,
+  bundle: true,
   format: 'iife',
   target: 'es2022',
   sourcemap: false,
@@ -181,8 +193,9 @@ async function build() {
     console.log('👀 Starting watch mode (watching ALL .ts, .html, .css, assets)...');
     startReloadServer();
 
-    const ctx = await esbuild.context(buildOptions);
-    await ctx.rebuild();
+    const ctxUnbundled = await esbuild.context(unbundledOptions);
+    const ctxBundled = await esbuild.context(bundledOptions);
+    await Promise.all([ctxUnbundled.rebuild(), ctxBundled.rebuild()]);
     copyAllStatic();
     appendDevReloader();
 
@@ -193,7 +206,7 @@ async function build() {
       debounceTimer = setTimeout(async () => {
         try {
           console.log(`📝 File changed: ${filename || 'file'} -> Rebuilding...`);
-          await ctx.rebuild();
+          await Promise.all([ctxUnbundled.rebuild(), ctxBundled.rebuild()]);
           copyAllStatic();
           appendDevReloader();
           notifyReload();
@@ -222,7 +235,10 @@ async function build() {
     console.log('⚡ Ready! Sửa bất kỳ file .ts, .css, .html nào, Chrome sẽ tự động reload ngay lập tức.');
   } else {
     console.log('📦 Compiling with esbuild (Production build)...');
-    await esbuild.build(buildOptions);
+    await Promise.all([
+      esbuild.build(unbundledOptions),
+      esbuild.build(bundledOptions),
+    ]);
     console.log('✨ Build complete! Output directory: dist/\n');
   }
 }

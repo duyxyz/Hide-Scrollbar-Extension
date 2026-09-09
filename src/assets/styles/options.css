@@ -402,89 +402,18 @@ body {
   flex: 1;
   min-height: 0;
   height: 100%;
-  background: #ffffff;
-  border: none;
+  border: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 4px;
   overflow: hidden;
-  position: relative;
+}
+
+.editor-container .cm-editor {
+  height: 100%;
   width: 100%;
 }
 
-.line-numbers {
-  width: 46px;
-  padding: 10px 8px;
-  text-align: right;
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 13px;
-  line-height: 20px;
-  color: var(--muted);
-  opacity: 0.85;
-  user-select: none;
-  background-color: var(--secondary-bg);
-  border: none;
-  white-space: pre;
-  overflow: hidden;
-  height: 100%;
-}
-
-.editor-textarea {
-  color-scheme: light;
-  flex: 1;
-  height: 100%;
-  padding: 10px 14px;
-  border: none;
-  outline: none;
-  background: #ffffff;
-  color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 13px;
-  line-height: 20px;
-  resize: none;
-  white-space: pre;
-  overflow-y: auto;
-  overflow-x: auto;
-  tab-size: 4;
-  caret-color: var(--accent);
-}
-
-.editor-textarea::placeholder {
-  color: var(--muted);
-  opacity: 0.6;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .editor-container {
-    background: #000000;
-  }
-
-  :root:not([data-theme="light"]) .editor-textarea {
-    color-scheme: dark;
-    background: #000000;
-    color: #ffffff;
-    caret-color: #58a6ff;
-  }
-}
-
-:root[data-theme="dark"] .editor-container {
-  background: #000000;
-}
-
-:root[data-theme="dark"] .editor-textarea {
-  color-scheme: dark;
-  background: #000000;
-  color: #ffffff;
-  caret-color: #58a6ff;
-}
-
-:root[data-theme="light"] .editor-container {
-  background: #ffffff;
-}
-
-:root[data-theme="light"] .editor-textarea {
-  color-scheme: light;
-  background: #ffffff;
-  color: #2f3446;
-  caret-color: var(--accent);
+.editor-container .cm-gutters {
+  border-right: 1px solid rgba(128, 128, 128, 0.25);
 }
 
 /* ── Guide Tab Components ─────────────────────────────────── */

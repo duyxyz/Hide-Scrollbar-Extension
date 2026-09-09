@@ -1,3 +1,40 @@
+import { EditorView, placeholder, keymap } from '@codemirror/view';
+import { EditorState, Compartment } from '@codemirror/state';
+import { basicSetup } from 'codemirror';
+import { StreamLanguage } from '@codemirror/language';
+import { oneDark } from '@codemirror/theme-one-dark';
+
+/* ── Minimal CodeMirror 6 Language for Whitelist ────────────────── */
+
+const whitelistStreamParser = {
+  token(stream: any) {
+    if (stream.sol()) {
+      stream.eatSpace();
+      if (stream.peek() === '!' || stream.peek() === '#') {
+        stream.skipToEnd();
+        return 'lineComment';
+      }
+    }
+    if (stream.eatSpace()) return null;
+    if (stream.peek() === '!' || stream.peek() === '#') {
+      stream.skipToEnd();
+      return 'lineComment';
+    }
+    if (stream.match(/^https?:\/\/[^\s]+/)) {
+      return 'url';
+    }
+    if (stream.match(/^(\*\.)?[a-zA-Z0-9][-a-zA-Z0-9]*(\.[a-zA-Z0-9][-a-zA-Z0-9]*)*(:\d+)?/)) {
+      return 'keyword';
+    }
+    stream.next();
+    return null;
+  },
+};
+
+const whitelistLanguage = StreamLanguage.define(whitelistStreamParser);
+
+/* ── Main Settings Initialization ──────────────────────────────── */
+
 const initSettings = () => {
   'use strict';
 
@@ -31,10 +68,101 @@ const initSettings = () => {
   const btnExportWhitelist = document.getElementById('btnExportWhitelist') as HTMLButtonElement | null;
   const whitelistFileInput = document.getElementById('whitelistFileInput') as HTMLInputElement | null;
   const saveIndicator = document.getElementById('saveIndicator') as HTMLElement | null;
-  const lineNumbers = document.getElementById('lineNumbers') as HTMLElement | null;
-  const whitelistEditor = document.getElementById('whitelistEditor') as HTMLTextAreaElement | null;
+  const whitelistEditorContainer = document.getElementById('whitelistEditorContainer') as HTMLElement | null;
 
   let lastSavedWhitelistText = '';
+  let editorView: EditorView | null = null;
+  const themeCompartment = new Compartment();
+
+  const darkTheme = EditorView.theme(
+    {
+      '&': {
+        backgroundColor: 'var(--secondary-bg) !important',
+        color: 'var(--text)',
+      },
+      '.cm-gutters': {
+        backgroundColor: 'var(--secondary-bg) !important',
+        color: 'var(--muted)',
+        borderRight: '1px solid rgba(255, 255, 255, 0.15) !important',
+      },
+      '.cm-activeLineGutter': {
+        backgroundColor: 'rgba(255, 255, 255, 0.07)',
+      },
+      '.cm-activeLine': {
+        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+      },
+    },
+    { dark: true }
+  );
+
+  const getEditorText = (): string => (editorView ? editorView.state.doc.toString() : '');
+
+  const setEditorText = (text: string): void => {
+    if (!editorView) return;
+    editorView.dispatch({
+      changes: {
+        from: 0,
+        to: editorView.state.doc.length,
+        insert: text,
+      },
+    });
+  };
+
+  const checkWhitelistDirty = (): void => {
+    if (!btnApplyWhitelist || !btnRevertWhitelist) return;
+    const isDirty = getEditorText() !== lastSavedWhitelistText;
+    btnApplyWhitelist.disabled = !isDirty;
+    btnRevertWhitelist.disabled = !isDirty;
+  };
+
+  const updateEditorTheme = (themeName?: string): void => {
+    if (!editorView) return;
+    const theme = themeName || (settingTheme ? settingTheme.value : 'system');
+    const isDark =
+      theme === 'dark' ||
+      (theme === 'system' && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    editorView.dispatch({
+      effects: themeCompartment.reconfigure(isDark ? [oneDark, darkTheme] : []),
+    });
+  };
+
+  // Initialize CodeMirror 6 Editor
+  if (whitelistEditorContainer) {
+    const isInitialDark =
+      typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    editorView = new EditorView({
+      state: EditorState.create({
+        doc: '',
+        extensions: [
+          basicSetup,
+          whitelistLanguage,
+          themeCompartment.of(isInitialDark ? [oneDark, darkTheme] : []),
+          EditorView.theme({
+            '&': { height: '100%' },
+          }),
+          placeholder('! Enter domains here, one per line\nexample.com\nyoutube.com'),
+          EditorView.updateListener.of((update) => {
+            if (update.docChanged) {
+              checkWhitelistDirty();
+            }
+          }),
+          keymap.of([
+            {
+              key: 'Mod-s',
+              run: () => {
+                if (btnApplyWhitelist && !btnApplyWhitelist.disabled) {
+                  applyWhitelistChanges();
+                }
+                return true;
+              },
+            },
+          ]),
+        ],
+      }),
+      parent: whitelistEditorContainer,
+    });
+  }
 
   /* ── Tab Switching ────────────────────────────────────────── */
 
@@ -57,8 +185,8 @@ const initSettings = () => {
       history.replaceState(null, '', newUrl);
     }
 
-    if (tabName === 'whitelist') {
-      updateLineNumbers();
+    if (tabName === 'whitelist' && editorView) {
+      editorView.requestMeasure();
     }
   }
 
@@ -80,42 +208,10 @@ const initSettings = () => {
     }
   });
 
-  /* ── Line Numbers & Editor Helper ─────────────────────────── */
-
-  function updateLineNumbers(): void {
-    if (!whitelistEditor || !lineNumbers) return;
-    const lines = whitelistEditor.value.split('\n');
-    const count = Math.max(lines.length, 1);
-    const nums = Array.from({ length: count }, (_, i) => i + 1).join('\n');
-    lineNumbers.textContent = nums;
-  }
-
-  function checkWhitelistDirty(): void {
-    if (!whitelistEditor || !btnApplyWhitelist || !btnRevertWhitelist) return;
-    const isDirty = whitelistEditor.value !== lastSavedWhitelistText;
-    btnApplyWhitelist.disabled = !isDirty;
-    btnRevertWhitelist.disabled = !isDirty;
-  }
-
-  if (whitelistEditor) {
-    whitelistEditor.addEventListener('input', () => {
-      updateLineNumbers();
-      checkWhitelistDirty();
-    });
-
-    whitelistEditor.addEventListener('scroll', () => {
-      if (lineNumbers && whitelistEditor) {
-        lineNumbers.scrollTop = whitelistEditor.scrollTop;
-      }
-    });
-
-    // Support Ctrl+S / Cmd+S to apply changes
-    whitelistEditor.addEventListener('keydown', (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-        e.preventDefault();
-        if (btnApplyWhitelist && !btnApplyWhitelist.disabled) {
-          applyWhitelistChanges();
-        }
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (settingTheme && settingTheme.value === 'system') {
+        updateEditorTheme('system');
       }
     });
   }
@@ -167,16 +263,14 @@ const initSettings = () => {
         if (applyTheme) {
           applyTheme(theme);
         }
+        updateEditorTheme(theme);
 
         // Whitelist
         const domains = normalizeWhitelist ? normalizeWhitelist(state.whitelist || []) : (state.whitelist || []);
         const text = domains.join('\n');
-        if (whitelistEditor) {
-          whitelistEditor.value = text;
-          lastSavedWhitelistText = text;
-          updateLineNumbers();
-          checkWhitelistDirty();
-        }
+        setEditorText(text);
+        lastSavedWhitelistText = text;
+        checkWhitelistDirty();
       });
     }
 
@@ -214,6 +308,7 @@ const initSettings = () => {
       const themeVal = settingTheme.value;
       if (applyTheme) applyTheme(themeVal);
       setSyncValue({ theme: themeVal });
+      updateEditorTheme(themeVal);
     });
   }
 
@@ -302,10 +397,11 @@ const initSettings = () => {
   /* ── Whitelist Tab Event Listeners ────────────────────────── */
 
   function applyWhitelistChanges(): void {
-    if (!whitelistEditor || !setSyncValue) return;
-    const domains = parseEditorContent(whitelistEditor.value);
+    if (!editorView || !setSyncValue) return;
+    const currentText = getEditorText();
+    const domains = parseEditorContent(currentText);
     setSyncValue({ whitelist: domains }).then(() => {
-      lastSavedWhitelistText = whitelistEditor.value;
+      lastSavedWhitelistText = currentText;
       checkWhitelistDirty();
       showSavedToast('Changes applied');
     });
@@ -317,18 +413,14 @@ const initSettings = () => {
 
   if (btnRevertWhitelist) {
     btnRevertWhitelist.addEventListener('click', () => {
-      if (whitelistEditor) {
-        whitelistEditor.value = lastSavedWhitelistText;
-        updateLineNumbers();
-        checkWhitelistDirty();
-      }
+      setEditorText(lastSavedWhitelistText);
+      checkWhitelistDirty();
     });
   }
 
   if (btnExportWhitelist) {
     btnExportWhitelist.addEventListener('click', () => {
-      if (!whitelistEditor) return;
-      const content = whitelistEditor.value;
+      const content = getEditorText();
       const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement('a');
@@ -365,14 +457,12 @@ const initSettings = () => {
           importedLines = text.split('\n');
         }
 
-        if (whitelistEditor) {
-          const currentVal = whitelistEditor.value.trim();
-          const appendText = importedLines.map((l) => String(l).trim()).filter(Boolean).join('\n');
+        const currentVal = getEditorText().trim();
+        const appendText = importedLines.map((l) => String(l).trim()).filter(Boolean).join('\n');
 
-          whitelistEditor.value = currentVal ? `${currentVal}\n${appendText}` : appendText;
-          updateLineNumbers();
-          checkWhitelistDirty();
-        }
+        const nextVal = currentVal ? `${currentVal}\n${appendText}` : appendText;
+        setEditorText(nextVal);
+        checkWhitelistDirty();
       };
 
       reader.readAsText(file);
@@ -417,6 +507,7 @@ const initSettings = () => {
           const newTheme = String(changes.theme.newValue || 'system');
           if (settingTheme) settingTheme.value = newTheme;
           if (applyTheme) applyTheme(newTheme);
+          updateEditorTheme(newTheme);
         }
       }
     });
