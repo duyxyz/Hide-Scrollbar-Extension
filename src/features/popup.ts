@@ -162,7 +162,14 @@ const initPopup = () => {
     const domain = sanitizeDomain ? sanitizeDomain(raw) : raw.trim();
     if (!domain || !setSyncValue) return;
 
-    const newList = currentWhitelist.filter((item) => item !== domain);
+    const cleanRaw = domain.toLowerCase();
+    const withoutWww = cleanRaw.startsWith('www.') ? cleanRaw.slice(4) : cleanRaw;
+    const withWww = `www.${withoutWww}`;
+
+    const newList = currentWhitelist.filter((item) => {
+      const cleanItem = item.trim().toLowerCase();
+      return cleanItem !== cleanRaw && cleanItem !== withoutWww && cleanItem !== withWww;
+    });
     currentWhitelist = newList;
     applyImmediateToolbarIcon(currentScrollbarHidden, false);
     updateNotice(newList, currentScrollbarHidden);

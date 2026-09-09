@@ -120,7 +120,7 @@ const injectAllTabs = async (): Promise<void> => {
 
       if (tab.id && tab.url && (!isRestrictedUrl || !isRestrictedUrl(tab.url)) && chrome.scripting) {
         chrome.scripting.executeScript({
-          target: { tabId: tab.id },
+          target: { tabId: tab.id, allFrames: true },
           files: [
             'src/shared/constants.js',
             'src/shared/storage.js',
@@ -175,12 +175,20 @@ chrome.commands.onCommand.addListener((command) => {
   }
 });
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message && message.action === 'toggle-scrollbar') {
-    handleToggleScrollbar();
+    handleToggleScrollbar()
+      .then(() => sendResponse({ ok: true }))
+      .catch((err) => sendResponse({ ok: false, error: String(err) }));
+    return true;
   } else if (message && message.action === 'update-icons') {
     cachedState = null;
-    updateAllBadges().catch(() => {});
+    updateAllBadges()
+      .then(() => sendResponse({ ok: true }))
+      .catch(() => sendResponse({ ok: true }));
+    return true;
   }
+  sendResponse({ ok: true });
+  return false;
 });
 

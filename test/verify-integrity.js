@@ -158,16 +158,18 @@ assert(service.sanitizeDomain('# This is a comment') === '', 'Ignore comment sta
 assert(service.sanitizeDomain('   sub.domain.co.uk/   ') === 'sub.domain.co.uk', 'Sanitize subdomain with whitespace');
 assert(service.sanitizeDomain('http://localhost:3000/test') === 'localhost', 'Sanitize localhost with port');
 assert(service.sanitizeDomain('127.0.0.1:8080') === '127.0.0.1', 'Sanitize IP with port');
-assert(service.sanitizeDomain('*.google.com') === 'google.com', 'Sanitize wildcard prefix *.domain');
+assert(service.sanitizeDomain('*.google.com') === '*.google.com', 'Sanitize preserves wildcard prefix *.domain');
+assert(service.sanitizeDomain('https://admin:pass@example.com/test') === 'example.com', 'Sanitize strips credentials from URL');
 
 const list = service.normalizeWhitelist(['example.com', '  ! note', '  YOUTUBE.COM  ', 'example.com', '# note 2', '*.github.com', 'localhost:3000']);
-assert(list.length === 4 && list.includes('example.com') && list.includes('youtube.com') && list.includes('github.com') && list.includes('localhost'), 'Normalize whitelist deduplicates, strips comments, ports & wildcards');
+assert(list.length === 4 && list.includes('example.com') && list.includes('youtube.com') && list.includes('*.github.com') && list.includes('localhost'), 'Normalize whitelist deduplicates, strips comments, ports & wildcards');
 
 assert(service.isWhitelisted('example.com', list) === true, 'isWhitelisted finds domain');
-assert(service.isWhitelisted('sub.example.com', list) === true, 'isWhitelisted finds subdomain');
+assert(service.isWhitelisted('www.example.com', list) === true, 'isWhitelisted finds www alias');
+assert(service.isWhitelisted('sub.example.com', list) === false, 'Subdomain is NOT matched without wildcard rule');
+assert(service.isWhitelisted('github.com', list) === true, 'Wildcard matches apex domain');
 assert(service.isWhitelisted('gist.github.com', list) === true, 'isWhitelisted matches subdomain of wildcard domain');
 assert(service.isWhitelisted('localhost', list) === true, 'isWhitelisted finds localhost');
-assert(service.isWhitelisted('sub.localhost', list) === true, 'isWhitelisted matches subdomain of localhost');
 assert(service.isWhitelisted('localhost:3000', list) === true, 'isWhitelisted matches localhost with port');
 assert(service.isWhitelisted('other.com', list) === false, 'isWhitelisted returns false for non-listed site');
 

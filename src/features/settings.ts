@@ -342,7 +342,7 @@ const initSettings = () => {
         anchor.href = url;
         anchor.download = BACKUP_FILENAME || 'scrollhide-backup.json';
         anchor.click();
-        URL.revokeObjectURL(url);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
       });
     });
   }
@@ -430,7 +430,7 @@ const initSettings = () => {
       anchor.href = url;
       anchor.download = 'scrollhide-whitelist.txt';
       anchor.click();
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
   }
 
@@ -444,28 +444,40 @@ const initSettings = () => {
 
       const reader = new FileReader();
       reader.onload = (event) => {
-        const text = event.target?.result as string;
+        const text = ((event.target?.result as string) || '').trim();
         let importedLines: string[] = [];
 
-        try {
-          // Try JSON format first
-          const parsed = JSON.parse(text);
-          if (Array.isArray(parsed.whitelist)) {
-            importedLines = parsed.whitelist;
-          } else if (Array.isArray(parsed)) {
-            importedLines = parsed;
+        if (text.startsWith('{') || text.startsWith('[')) {
+          try {
+            const parsed = JSON.parse(text);
+            if (Array.isArray(parsed.whitelist)) {
+              importedLines = parsed.whitelist;
+            } else if (Array.isArray(parsed)) {
+              importedLines = parsed;
+            } else {
+              alert('Invalid whitelist JSON format. Expected an array of domains or an object containing a "whitelist" array.');
+              return;
+            }
+          } catch (_) {
+            importedLines = text.split('\n');
           }
-        } catch (_) {
-          // Plain text format
+        } else {
           importedLines = text.split('\n');
         }
 
+        const validLines = importedLines.map((l) => String(l).trim()).filter(Boolean);
+        if (validLines.length === 0) {
+          alert('No valid domain entries found in the file.');
+          return;
+        }
+
         const currentVal = getEditorText().trim();
-        const appendText = importedLines.map((l) => String(l).trim()).filter(Boolean).join('\n');
+        const appendText = validLines.join('\n');
 
         const nextVal = currentVal ? `${currentVal}\n${appendText}` : appendText;
         setEditorText(nextVal);
         checkWhitelistDirty();
+        showSavedToast(`Imported ${validLines.length} domain(s)`);
       };
 
       reader.readAsText(file);

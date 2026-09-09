@@ -14,14 +14,19 @@ const getConstants = () => {
 };
 
 export const sanitizeDomain = (raw: unknown): string => {
-  const str = String(raw || '').trim();
+  let str = String(raw || '').trim().toLowerCase();
   if (!str || str.startsWith('!') || str.startsWith('#')) return '';
-  return str
-    .toLowerCase()
-    .replace(/^(https?:\/\/)?/, '')
-    .replace(/^\*+\.?/, '')
+
+  const hasWildcard = str.startsWith('*.') || str.startsWith('*');
+  str = str
+    .replace(/^[a-zA-Z]+:\/\//, '')
+    .replace(/^.*@/, '')
     .replace(/[/?#].*$/, '')
     .replace(/:\d+$/, '');
+
+  str = str.replace(/^\*+\.?/, '');
+  if (!str) return '';
+  return hasWildcard ? `*.${str}` : str;
 };
 
 export const normalizeWhitelist = (domains: unknown): string[] =>
@@ -51,14 +56,27 @@ export const isWhitelisted = (hostname: string | null | undefined, whitelist: st
     );
   }
 
+  // 1. Exact match (e.g., mail.google.com === mail.google.com)
   if (cachedSet.has(cleanHost)) return true;
 
-  // Check parent domains (e.g., mail.google.com -> google.com, sub.localhost -> localhost)
+  // 2. www alias match: www.domain.com <-> domain.com
+  const withoutWww = cleanHost.startsWith('www.') ? cleanHost.slice(4) : null;
+  const withWww = cleanHost.startsWith('www.') ? null : `www.${cleanHost}`;
+  if (withoutWww && cachedSet.has(withoutWww)) return true;
+  if (withWww && cachedSet.has(withWww)) return true;
+
+  // 3. Exact apex domain matching a wildcard rule (*.google.com matches google.com)
+  if (cachedSet.has(`*.${cleanHost}`)) return true;
+
+  // 4. Wildcard subdomain match: ONLY matches if user explicitly added a wildcard rule (*.domain)
+  // e.g., cleanHost "mail.google.com" matches "*.google.com", but DOES NOT match plain "google.com"
   const parts = cleanHost.split('.');
   while (parts.length > 1) {
     parts.shift();
-    if (cachedSet.has(parts.join('.'))) return true;
+    const wildcardRule = `*.${parts.join('.')}`;
+    if (cachedSet.has(wildcardRule)) return true;
   }
+
   return false;
 };
 
