@@ -29,8 +29,7 @@ body {
   background-color: var(--secondary-bg);
   display: flex;
   align-items: center;
-  padding: 0 0 0 16px;
-  gap: 16px;
+  padding: 0;
   height: 34px;
   user-select: none;
   flex-shrink: 0;
@@ -41,7 +40,10 @@ body {
 .nav-brand {
   display: flex;
   align-items: center;
-  margin-right: 4px;
+  justify-content: center;
+  height: 100%;
+  padding: 0 16px;
+  margin: 0;
 }
 
 .nav-logo {
@@ -54,7 +56,7 @@ body {
   display: flex;
   align-items: center;
   height: 100%;
-  gap: 2px;
+  gap: 0;
 }
 
 .nav-tab {
@@ -82,19 +84,24 @@ body {
   color: var(--text);
 }
 
-.nav-tab.active,
-.nav-tab.active:hover,
-.nav-tab:focus,
-.nav-tab:focus-visible {
+.nav-tab.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
-  background: rgba(127, 127, 127, 0.08);
   font-weight: 500;
 }
 
-.nav-tab.active svg,
-.nav-tab:focus svg,
-.nav-tab:focus-visible svg {
+.nav-tab.active:hover {
+  background: rgba(127, 127, 127, 0.12);
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav-tab:focus,
+.nav-tab:focus-visible {
+  outline: none;
+}
+
+.nav-tab.active svg {
   color: var(--accent);
 }
 
@@ -510,7 +517,7 @@ kbd {
 }
 
 .badge-off {
-  background-color: var(--muted);
+  background-color: #64748b;
 }
 
 .btn-sample {

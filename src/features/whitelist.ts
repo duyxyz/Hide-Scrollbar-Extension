@@ -53,9 +53,9 @@ export const isWhitelisted = (hostname: string | null | undefined, whitelist: st
 
   if (cachedSet.has(cleanHost)) return true;
 
-  // Check parent domains (e.g., mail.google.com -> google.com)
+  // Check parent domains (e.g., mail.google.com -> google.com, sub.localhost -> localhost)
   const parts = cleanHost.split('.');
-  while (parts.length > 2) {
+  while (parts.length > 1) {
     parts.shift();
     if (cachedSet.has(parts.join('.'))) return true;
   }

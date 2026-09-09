@@ -13,7 +13,7 @@ export const DEFAULT_SYNC_STATE = {
 export const ScrollHideConstants = {
   BACKUP_FILENAME: 'scrollhide-backup.json',
   BADGE_ACTIVE_COLOR: '#2772ed',
-  BADGE_INACTIVE_COLOR: '#888',
+  BADGE_INACTIVE_COLOR: '#64748b',
   DEFAULT_SYNC_STATE,
   RESTRICTED_HOSTS: [] as string[],
   RESTRICTED_PROTOCOLS: [

@@ -167,6 +167,7 @@ assert(service.isWhitelisted('example.com', list) === true, 'isWhitelisted finds
 assert(service.isWhitelisted('sub.example.com', list) === true, 'isWhitelisted finds subdomain');
 assert(service.isWhitelisted('gist.github.com', list) === true, 'isWhitelisted matches subdomain of wildcard domain');
 assert(service.isWhitelisted('localhost', list) === true, 'isWhitelisted finds localhost');
+assert(service.isWhitelisted('sub.localhost', list) === true, 'isWhitelisted matches subdomain of localhost');
 assert(service.isWhitelisted('localhost:3000', list) === true, 'isWhitelisted matches localhost with port');
 assert(service.isWhitelisted('other.com', list) === false, 'isWhitelisted returns false for non-listed site');
 

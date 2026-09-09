@@ -71,7 +71,18 @@
         if (target) {
           target.appendChild(style);
         } else {
+          const observer = new MutationObserver(() => {
+            const el = document.head || document.documentElement;
+            if (el) {
+              if (!document.getElementById(STYLE_ID)) {
+                el.appendChild(style!);
+              }
+              observer.disconnect();
+            }
+          });
+          observer.observe(document, { childList: true, subtree: true });
           document.addEventListener('DOMContentLoaded', () => {
+            observer.disconnect();
             if (!document.getElementById(STYLE_ID)) {
               (document.head || document.documentElement)?.appendChild(style!);
             }
@@ -92,6 +103,8 @@
     }
   }
 
+  let hasIncremented = false;
+
   const update = async (): Promise<void> => {
     if (!getSyncState || typeof chrome === 'undefined' || !chrome.runtime?.id) return;
     try {
@@ -104,7 +117,8 @@
       applyStyle(shouldHide);
 
       // Defer analytics counter write to browser idle time so it never competes with initial page rendering
-      if (shouldHide && window === window.top && typeof chrome !== 'undefined' && chrome.runtime?.id && chrome.storage?.local) {
+      if (shouldHide && !hasIncremented && window === window.top && typeof chrome !== 'undefined' && chrome.runtime?.id && chrome.storage?.local) {
+        hasIncremented = true;
         const incrementCounter = () => {
           try {
             if (typeof chrome === 'undefined' || !chrome.runtime?.id || !chrome.storage?.local) return;

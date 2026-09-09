@@ -1,6 +1,6 @@
-import { EditorView, placeholder, keymap } from '@codemirror/view';
+import { EditorView, placeholder, keymap, lineNumbers, highlightActiveLine, highlightActiveLineGutter } from '@codemirror/view';
 import { EditorState, Compartment } from '@codemirror/state';
-import { basicSetup } from 'codemirror';
+import { minimalSetup } from 'codemirror';
 import { StreamLanguage } from '@codemirror/language';
 import { oneDark } from '@codemirror/theme-one-dark';
 
@@ -135,7 +135,10 @@ const initSettings = () => {
       state: EditorState.create({
         doc: '',
         extensions: [
-          basicSetup,
+          minimalSetup,
+          lineNumbers(),
+          highlightActiveLineGutter(),
+          highlightActiveLine(),
           whitelistLanguage,
           themeCompartment.of(isInitialDark ? [oneDark, darkTheme] : []),
           EditorView.theme({
@@ -496,6 +499,14 @@ const initSettings = () => {
     });
   }
 
+  // Warn user if closing tab with unsaved whitelist edits
+  window.addEventListener('beforeunload', (e) => {
+    if (getEditorText() !== lastSavedWhitelistText) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
   // Listen to remote changes
   if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.onChanged) {
     chrome.storage.onChanged.addListener((changes, namespace) => {
@@ -508,6 +519,19 @@ const initSettings = () => {
           if (settingTheme) settingTheme.value = newTheme;
           if (applyTheme) applyTheme(newTheme);
           updateEditorTheme(newTheme);
+        }
+        if (changes.whitelist && Array.isArray(changes.whitelist.newValue)) {
+          const isDirty = getEditorText() !== lastSavedWhitelistText;
+          const newDomains = normalizeWhitelist ? normalizeWhitelist(changes.whitelist.newValue) : changes.whitelist.newValue;
+          const newText = newDomains.join('\n');
+          if (!isDirty) {
+            setEditorText(newText);
+            lastSavedWhitelistText = newText;
+            checkWhitelistDirty();
+          } else {
+            lastSavedWhitelistText = newText;
+            checkWhitelistDirty();
+          }
         }
       }
     });

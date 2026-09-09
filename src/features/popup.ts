@@ -22,6 +22,35 @@ const initPopup = () => {
   let isRestricted = false;
   let currentWhitelist: string[] = [];
   let currentScrollbarHidden = true;
+  let currentTabId: number | undefined;
+
+  const ICONS_ACTIVE = {
+    16: '/assets/icons/icon16.png',
+    32: '/assets/icons/icon32.png',
+    48: '/assets/icons/icon48.png',
+    128: '/assets/icons/icon128.png',
+  };
+
+  const ICONS_INACTIVE = {
+    16: '/assets/icons/icon16-off.png',
+    32: '/assets/icons/icon32-off.png',
+    48: '/assets/icons/icon48-off.png',
+    128: '/assets/icons/icon128-off.png',
+  };
+
+  const applyImmediateToolbarIcon = (hidden: boolean, inWhitelist: boolean): void => {
+    if (typeof chrome === 'undefined' || !chrome.action?.setIcon) return;
+    const isTabActive = hidden && !inWhitelist && !isRestricted;
+    if (currentTabId !== undefined) {
+      chrome.action.setIcon({
+        path: isTabActive ? ICONS_ACTIVE : ICONS_INACTIVE,
+        tabId: currentTabId,
+      }).catch(() => {});
+    }
+    chrome.action.setIcon({
+      path: hidden ? ICONS_ACTIVE : ICONS_INACTIVE,
+    }).catch(() => {});
+  };
 
   if (applyI18n) {
     applyI18n();
@@ -116,10 +145,14 @@ const initPopup = () => {
     if (currentWhitelist.includes(domain)) return;
     const newList = [...currentWhitelist, domain].sort();
     currentWhitelist = newList;
+    applyImmediateToolbarIcon(currentScrollbarHidden, true);
     updateNotice(newList, currentScrollbarHidden);
 
     try {
       await setSyncValue({ whitelist: newList });
+      if (typeof chrome !== 'undefined' && chrome.runtime?.sendMessage) {
+        chrome.runtime.sendMessage({ action: 'update-icons' }).catch(() => {});
+      }
     } catch (err) {
       console.error('[Popup] Failed to add domain', { domain, error: err });
     }
@@ -131,10 +164,14 @@ const initPopup = () => {
 
     const newList = currentWhitelist.filter((item) => item !== domain);
     currentWhitelist = newList;
+    applyImmediateToolbarIcon(currentScrollbarHidden, false);
     updateNotice(newList, currentScrollbarHidden);
 
     try {
       await setSyncValue({ whitelist: newList });
+      if (typeof chrome !== 'undefined' && chrome.runtime?.sendMessage) {
+        chrome.runtime.sendMessage({ action: 'update-icons' }).catch(() => {});
+      }
     } catch (err) {
       console.error('[Popup] Failed to remove domain', { domain, error: err });
     }
@@ -145,11 +182,16 @@ const initPopup = () => {
       toggle.classList.toggle('active');
       const hidden = toggle.classList.contains('active');
       currentScrollbarHidden = hidden;
+      const inList = isWhitelisted ? isWhitelisted(currentHostname, currentWhitelist) : false;
+      applyImmediateToolbarIcon(hidden, inList);
       updateStats(currentWhitelist, hidden);
 
       if (setSyncValue) {
         try {
           await setSyncValue({ scrollbarHidden: hidden });
+          if (typeof chrome !== 'undefined' && chrome.runtime?.sendMessage) {
+            chrome.runtime.sendMessage({ action: 'update-icons' }).catch(() => {});
+          }
         } catch (err) {
           console.error('[Popup] Failed to toggle scrollbar state', { hidden, error: err });
         }
@@ -266,6 +308,8 @@ const initPopup = () => {
 
   Promise.all([fetchActiveTab(), fetchSyncData(), fetchLocalCount()]).then(
     ([tab, syncData, hideCount]) => {
+      currentTabId = tab?.id;
+
       if (cleanedCnt) {
         cleanedCnt.textContent = hideCount.toLocaleString();
       }
@@ -287,6 +331,10 @@ const initPopup = () => {
           if (RESTRICTED_PROTOCOLS.includes(parsed.protocol) || parsed.protocol === 'file:') {
             if (parsed.protocol === 'about:') {
               currentHostname = parsed.href;
+            } else if (parsed.protocol === 'file:') {
+              const segments = parsed.pathname.split('/').filter(Boolean);
+              const fileName = segments.pop() || '';
+              currentHostname = fileName ? `file://.../${fileName}` : 'file://local-file';
             } else {
               currentHostname = parsed.protocol + '//' + parsed.hostname;
             }
@@ -301,6 +349,9 @@ const initPopup = () => {
       if (isRestricted) {
         applyRestrictedState();
       }
+
+      const inList = isWhitelisted ? isWhitelisted(currentHostname, currentWhitelist) : false;
+      applyImmediateToolbarIcon(currentScrollbarHidden, inList);
 
       updateNotice(currentWhitelist, currentScrollbarHidden);
     }

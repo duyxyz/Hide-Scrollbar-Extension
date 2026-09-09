@@ -31,34 +31,66 @@ const getCachedSyncState = async (): Promise<{ scrollbarHidden: boolean; whiteli
   return cachedState;
 };
 
-const updateBadge = async (tabId: number | undefined, scrollbarHidden: boolean, whitelist: string[]): Promise<void> => {
+const ICONS_ACTIVE = {
+  16: '/assets/icons/icon16.png',
+  32: '/assets/icons/icon32.png',
+  48: '/assets/icons/icon48.png',
+  128: '/assets/icons/icon128.png',
+};
+
+const ICONS_INACTIVE = {
+  16: '/assets/icons/icon16-off.png',
+  32: '/assets/icons/icon32-off.png',
+  48: '/assets/icons/icon48-off.png',
+  128: '/assets/icons/icon128-off.png',
+};
+
+const updateBadge = async (
+  tabOrId: chrome.tabs.Tab | number | undefined,
+  scrollbarHidden: boolean,
+  whitelist: string[]
+): Promise<void> => {
+  if (tabOrId === undefined) return;
+  let tabId: number | undefined;
+  let tabUrl: string | undefined;
+
+  if (typeof tabOrId === 'number') {
+    tabId = tabOrId;
+    try {
+      const tab = await chrome.tabs.get(tabId);
+      tabUrl = tab?.url;
+    } catch (_) {
+      tabUrl = undefined;
+    }
+  } else {
+    tabId = tabOrId.id;
+    tabUrl = tabOrId.url;
+  }
+
   if (tabId === undefined) return;
+
   let restricted = false;
   let whitelisted = false;
 
-  try {
-    const tab = await chrome.tabs.get(tabId);
-    if (tab.url) {
-      restricted = isRestrictedUrl ? isRestrictedUrl(tab.url) : false;
-      if (!restricted && isWhitelisted) {
-        whitelisted = isWhitelisted(new URL(tab.url).hostname, whitelist);
+  if (tabUrl) {
+    restricted = isRestrictedUrl ? isRestrictedUrl(tabUrl) : false;
+    if (!restricted && isWhitelisted) {
+      try {
+        whitelisted = isWhitelisted(new URL(tabUrl).hostname, whitelist);
+      } catch (_) {
+        whitelisted = false;
       }
-    } else {
-      restricted = true;
     }
-  } catch (_) {
+  } else {
     restricted = true;
   }
 
-  if (restricted) {
-    chrome.action.setBadgeText({ text: '', tabId }).catch(() => {});
-    return;
-  }
+  // Clear badge text completely for a clean look
+  chrome.action.setBadgeText({ text: '', tabId }).catch(() => {});
 
-  const active = scrollbarHidden && !whitelisted;
-  chrome.action.setBadgeText({ text: active ? 'ON' : 'OFF', tabId }).catch(() => {});
-  chrome.action.setBadgeBackgroundColor({
-    color: active ? BADGE_ACTIVE_COLOR : BADGE_INACTIVE_COLOR,
+  const active = !restricted && scrollbarHidden && !whitelisted;
+  chrome.action.setIcon({
+    path: active ? ICONS_ACTIVE : ICONS_INACTIVE,
     tabId,
   }).catch(() => {});
 };
@@ -71,8 +103,11 @@ const updateBadgeForTab = async (tabId: number | undefined): Promise<void> => {
 
 const updateAllBadges = async (): Promise<void> => {
   const { scrollbarHidden, whitelist } = await getCachedSyncState();
+  chrome.action.setIcon({
+    path: scrollbarHidden ? ICONS_ACTIVE : ICONS_INACTIVE,
+  }).catch(() => {});
   chrome.tabs.query({}, (tabs) => {
-    tabs.forEach((tab) => updateBadge(tab.id, scrollbarHidden, whitelist));
+    tabs.forEach((tab) => updateBadge(tab, scrollbarHidden, whitelist));
   });
 };
 
@@ -81,7 +116,7 @@ const injectAllTabs = async (): Promise<void> => {
 
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
-      updateBadge(tab.id, scrollbarHidden, whitelist);
+      updateBadge(tab, scrollbarHidden, whitelist);
 
       if (tab.id && tab.url && (!isRestrictedUrl || !isRestrictedUrl(tab.url)) && chrome.scripting) {
         chrome.scripting.executeScript({
@@ -115,8 +150,12 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 
 // Initialize tabs injection upon installation or update
 chrome.runtime.onInstalled.addListener(() => {
+  updateAllBadges().catch(() => {});
   injectAllTabs().catch(() => {});
 });
+
+// Run immediately whenever the service worker activates/wakes up
+updateAllBadges().catch(() => {});
 
 /* ── Keyboard Shortcuts & Messages ────────────────────────── */
 
@@ -139,6 +178,9 @@ chrome.commands.onCommand.addListener((command) => {
 chrome.runtime.onMessage.addListener((message) => {
   if (message && message.action === 'toggle-scrollbar') {
     handleToggleScrollbar();
+  } else if (message && message.action === 'update-icons') {
+    cachedState = null;
+    updateAllBadges().catch(() => {});
   }
 });
 
