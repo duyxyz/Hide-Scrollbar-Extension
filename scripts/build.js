@@ -177,6 +177,7 @@ const unbundledOptions = {
   format: 'iife',
   target: 'es2022',
   sourcemap: false,
+  minify: true,
 };
 
 const bundledOptions = {
@@ -186,6 +187,7 @@ const bundledOptions = {
   format: 'iife',
   target: 'es2022',
   sourcemap: false,
+  minify: true,
 };
 
 async function build() {
