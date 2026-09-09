@@ -13,9 +13,13 @@ console.log('🚀 Building extension to dist/ ...');
 
 // 1. Clean dist directory
 if (!isWatch && fs.existsSync(distDir)) {
-  fs.rmSync(distDir, { recursive: true, force: true });
+  try {
+    fs.rmSync(distDir, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
+  } catch (_) {}
 }
-fs.mkdirSync(distDir, { recursive: true });
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+}
 
 // 2. Type Check with tsc
 console.log('🔍 Running TypeScript type check (tsc --noEmit)...');
@@ -43,21 +47,48 @@ function copyRecursive(src, dest) {
   } else {
     const ext = path.extname(src).toLowerCase();
     if (ext !== '.ts') {
-      fs.copyFileSync(src, dest);
+      if (ext === '.css' && !isWatch) {
+        try {
+          const rawCss = fs.readFileSync(src, 'utf8');
+          const minified = esbuild.transformSync(rawCss, { loader: 'css', minify: true }).code;
+          fs.writeFileSync(dest, minified);
+        } catch (err) {
+          console.warn(`⚠️ Failed to minify CSS ${src}, copying as is.`, err.message);
+          fs.copyFileSync(src, dest);
+        }
+      } else {
+        fs.copyFileSync(src, dest);
+      }
     }
   }
+}
+
+function minifyHtml(html) {
+  return html
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/>\s+</g, '><')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+function copyHtmlFile(src, dest) {
+  if (!fs.existsSync(src)) return;
+  if (!isWatch) {
+    try {
+      const raw = fs.readFileSync(src, 'utf8');
+      fs.writeFileSync(dest, minifyHtml(raw), 'utf8');
+      return;
+    } catch (_) {}
+  }
+  fs.copyFileSync(src, dest);
 }
 
 function copyAllStatic() {
   if (fs.existsSync(path.join(rootDir, 'manifest.json'))) {
     fs.copyFileSync(path.join(rootDir, 'manifest.json'), path.join(distDir, 'manifest.json'));
   }
-  if (fs.existsSync(path.join(rootDir, 'src/options.html'))) {
-    fs.copyFileSync(path.join(rootDir, 'src/options.html'), path.join(distDir, 'options.html'));
-  }
-  if (fs.existsSync(path.join(rootDir, 'src/popup.html'))) {
-    fs.copyFileSync(path.join(rootDir, 'src/popup.html'), path.join(distDir, 'popup.html'));
-  }
+  copyHtmlFile(path.join(rootDir, 'src/options.html'), path.join(distDir, 'options.html'));
+  copyHtmlFile(path.join(rootDir, 'src/popup.html'), path.join(distDir, 'popup.html'));
   if (fs.existsSync(path.join(rootDir, 'src/_locales'))) {
     copyRecursive(path.join(rootDir, 'src/_locales'), path.join(distDir, '_locales'));
   }

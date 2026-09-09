@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScrollHide — Dashboard</title>
+  <title>Hide Scrollbar - Dashboard</title>
   <link rel="stylesheet" href="assets/styles/tokens.css">
   <link rel="stylesheet" href="assets/styles/options.css">
 </head>
@@ -12,7 +12,7 @@
 <body>
   <header class="navbar">
     <div class="nav-brand">
-      <img src="assets/icons/icon48.png" alt="ScrollHide" class="nav-logo">
+      <img src="assets/icons/icon48.png" alt="Hide Scrollbar" class="nav-logo">
     </div>
     <nav class="nav-tabs" role="tablist">
       <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false">
@@ -276,14 +276,16 @@
           <h2 class="guide-section-title">2. Extension Popup Controls</h2>
           <ul class="guide-list">
             <li><strong>Main Power Toggle (⏻):</strong> Click the large center button to turn scrollbar hiding
-              <code>ON</code> or <code>OFF</code> globally across all tabs.</li>
+              <code>ON</code> or <code>OFF</code> globally across all tabs.
+            </li>
             <li><strong>Active Domain Indicator:</strong> Displays the hostname of the current web page.</li>
             <li><strong>Quick Whitelist (+ / −):</strong> Click to add or remove the current website to/from your
               exceptions list with a single click.</li>
             <li><strong>Statistics Panel:</strong>
               <ul>
                 <li><strong>Status:</strong> Shows whether scrollbars are currently <em>Active</em> (hidden),
-                  <em>Disabled</em>, <em>Whitelisted</em>, or <em>Restricted</em> on this page.</li>
+                  <em>Disabled</em>, <em>Whitelisted</em>, or <em>Restricted</em> on this page.
+                </li>
                 <li><strong>Exceptions:</strong> Total number of custom whitelisted domains.</li>
                 <li><strong>Cleaned:</strong> Counter tracking total scrollbars hidden during your browsing sessions.
                 </li>
@@ -302,10 +304,12 @@
           <ul class="guide-list">
             <li><strong>Format:</strong> Enter one domain per line (e.g. <code>youtube.com</code> or
               <code>docs.google.com</code>). Protocols like <code>https://</code> or trailing slashes are automatically
-              sanitized.</li>
+              sanitized.
+            </li>
             <li><strong>Comments Support:</strong> Organize your list with comments by starting lines with
               <code>!</code> or <code>#</code> (e.g. <code>! Work Applications</code>). Comments are ignored when
-              saving.</li>
+              saving.
+            </li>
             <li><strong>Apply & Revert:</strong> The <span class="btn-sample">Apply changes</span> button activates
               whenever changes are made. Use <span class="btn-sample">Revert</span> to discard unsaved edits.</li>
             <li><strong>Keyboard Shortcut:</strong> Press <kbd>Ctrl + S</kbd> (or <kbd>Cmd + S</kbd> on macOS) inside
@@ -321,8 +325,13 @@
           <p style="margin-bottom: 8px;">Pin the extension icon to your browser toolbar to monitor status in real-time:
           </p>
           <ul class="guide-list">
-            <li><img src="assets/icons/icon16.png" alt="Active" style="vertical-align: middle; width: 16px; height: 16px; margin-right: 6px;"> <strong>Active (Normal Icon):</strong> Scrollbar hiding is currently active on the tab you are viewing.</li>
-            <li><img src="assets/icons/icon16-off.png" alt="Inactive" style="vertical-align: middle; width: 16px; height: 16px; margin-right: 6px;"> <strong>Inactive (Grayscale Icon):</strong> Extension is globally disabled, page is in your Whitelist, or internal browser page.</li>
+            <li><img src="assets/icons/icon16.png" alt="Active"
+                style="vertical-align: middle; width: 16px; height: 16px; margin-right: 6px;"> <strong>Active (Normal
+                Icon):</strong> Scrollbar hiding is currently active on the tab you are viewing.</li>
+            <li><img src="assets/icons/icon16-off.png" alt="Inactive"
+                style="vertical-align: middle; width: 16px; height: 16px; margin-right: 6px;"> <strong>Inactive
+                (Grayscale Icon):</strong> Extension is globally disabled, page is in your Whitelist, or internal
+              browser page.</li>
           </ul>
         </div>
 
