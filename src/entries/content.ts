@@ -105,13 +105,38 @@
 
   let hasIncremented = false;
 
-  const update = async (): Promise<void> => {
+  let currentContentState: { scrollbarHidden: boolean; whitelist: string[] } = {
+    scrollbarHidden: true,
+    whitelist: [],
+  };
+
+  const update = async (
+    forcedState?: { scrollbarHidden?: boolean; whitelist?: string[] }
+  ): Promise<void> => {
     if (!getSyncState || typeof chrome === 'undefined' || !chrome.runtime?.id) return;
     try {
-      const state = await getSyncState();
-      if (!state) return;
-      const isWhite = isWhitelisted ? isWhitelisted(window.location.hostname, state.whitelist) : false;
-      const shouldHide = state.scrollbarHidden !== false && !isWhite && !isRestricted;
+      if (forcedState) {
+        if (forcedState.scrollbarHidden !== undefined) {
+          currentContentState.scrollbarHidden = forcedState.scrollbarHidden;
+        }
+        if (forcedState.whitelist !== undefined) {
+          currentContentState.whitelist = forcedState.whitelist;
+        }
+      } else {
+        const state = await getSyncState();
+        if (state) {
+          currentContentState = {
+            scrollbarHidden: state.scrollbarHidden !== false,
+            whitelist: Array.isArray(state.whitelist) ? (state.whitelist as string[]) : [],
+          };
+        }
+      }
+
+      const isWhite = isWhitelisted
+        ? isWhitelisted(window.location.hostname, currentContentState.whitelist)
+        : false;
+      const shouldHide =
+        currentContentState.scrollbarHidden !== false && !isWhite && !isRestricted;
 
       writeSessionCache(shouldHide);
       applyStyle(shouldHide);
@@ -150,7 +175,14 @@
       chrome.storage.onChanged.addListener((changes, namespace) => {
         if (typeof chrome === 'undefined' || !chrome.runtime?.id) return;
         if (namespace === 'sync' && (changes.scrollbarHidden || changes.whitelist)) {
-          update();
+          const partial: { scrollbarHidden?: boolean; whitelist?: string[] } = {};
+          if (changes.scrollbarHidden) {
+            partial.scrollbarHidden = Boolean(changes.scrollbarHidden.newValue);
+          }
+          if (changes.whitelist && Array.isArray(changes.whitelist.newValue)) {
+            partial.whitelist = changes.whitelist.newValue as string[];
+          }
+          update(partial);
         }
       });
     } catch (_) {}

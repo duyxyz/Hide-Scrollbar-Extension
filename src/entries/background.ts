@@ -143,8 +143,17 @@ chrome.tabs.onUpdated.addListener((tabId, info) => {
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync') {
-    cachedState = null; // Invalidate cache
-    updateAllBadges();
+    if (cachedState) {
+      if (changes.scrollbarHidden) {
+        cachedState.scrollbarHidden = Boolean(changes.scrollbarHidden.newValue);
+      }
+      if (changes.whitelist && Array.isArray(changes.whitelist.newValue)) {
+        cachedState.whitelist = changes.whitelist.newValue as string[];
+      }
+    } else {
+      cachedState = null;
+    }
+    updateAllBadges().catch(() => {});
   }
 });
 
@@ -160,13 +169,13 @@ updateAllBadges().catch(() => {});
 /* ── Keyboard Shortcuts & Messages ────────────────────────── */
 
 const handleToggleScrollbar = async (): Promise<void> => {
-  const syncData = await new Promise<{ scrollbarHidden?: boolean }>((resolve) => {
-    chrome.storage.sync.get({ scrollbarHidden: true }, resolve);
-  });
-  const newState = !(syncData.scrollbarHidden ?? true);
+  const { scrollbarHidden } = await getCachedSyncState();
+  const newState = !scrollbarHidden;
+  if (cachedState) {
+    cachedState.scrollbarHidden = newState;
+  }
   await chrome.storage.sync.set({ scrollbarHidden: newState });
-  cachedState = null;
-  updateAllBadges();
+  updateAllBadges().catch(() => {});
 };
 
 chrome.commands.onCommand.addListener((command) => {

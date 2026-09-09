@@ -490,16 +490,19 @@ const initSettings = () => {
   const copyReportInfoText = document.getElementById('copyReportInfoText') as HTMLElement | null;
   if (btnCopyReportInfo) {
     btnCopyReportInfo.addEventListener('click', async () => {
+      const extVersion =
+        typeof chrome !== 'undefined' && chrome.runtime?.getManifest
+          ? chrome.runtime.getManifest().version
+          : '2.1';
       const info = [
         '### Environment Details',
-        `- **Extension:** ScrollHide`,
+        `- **Extension:** ScrollHide v${extVersion}`,
         `- **User Agent:** ${navigator.userAgent}`,
         `- **Platform:** ${navigator.platform || 'Unknown'}`,
         `- **Screen Resolution:** ${window.screen.width}x${window.screen.height}`,
       ].join('\n');
 
-      try {
-        await navigator.clipboard.writeText(info);
+      const setCopiedUI = () => {
         if (copyReportInfoText) {
           const original = copyReportInfoText.textContent;
           copyReportInfoText.textContent = 'Copied!';
@@ -507,7 +510,29 @@ const initSettings = () => {
             if (copyReportInfoText) copyReportInfoText.textContent = original;
           }, 2000);
         }
-      } catch (_) {}
+      };
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(info);
+          setCopiedUI();
+        } else {
+          throw new Error('Clipboard API unavailable');
+        }
+      } catch (_) {
+        try {
+          const textArea = document.createElement('textarea');
+          textArea.value = info;
+          textArea.style.position = 'fixed';
+          textArea.style.opacity = '0';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          setCopiedUI();
+        } catch (_) {}
+      }
     });
   }
 
